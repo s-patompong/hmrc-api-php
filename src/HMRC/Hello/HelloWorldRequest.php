@@ -17,4 +17,11 @@ class HelloWorldRequest extends Request
     {
         return '/hello/world';
     }
+
+    function getHeaders()
+    {
+        return [
+            parent::HEADER_ACCEPT => $this->getAcceptHeader(),
+        ];
+    }
 }

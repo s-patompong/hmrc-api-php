@@ -16,10 +16,5 @@
         "psr-4": {
             "HMRC\\": "src/HMRC/"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "HMRC\\Tests\\": "tests/"
-        }
     }
 }

@@ -20,11 +20,20 @@ abstract class Request
     /** @var string constant for method POST */
     const METHOD_POST = 'POST';
 
+    /** @var string accept header for request */
+    const HEADER_ACCEPT = 'Accept';
+
+    /** @var string authorization header for request */
+    const HEADER_AUTHORIZATION = 'Authorization';
+
     /** @var Client Guzzle client */
     protected $client;
 
     /** @var string API base URL */
     protected $apiBaseUrl;
+
+    /** @var string Service version of HMRC API */
+    protected $serviceVersion = '1.0';
 
     public function __construct()
     {
@@ -46,6 +55,13 @@ abstract class Request
         return $this;
     }
 
+    public function setServiceVersion(int $serviceVersion)
+    {
+        $this->serviceVersion = $serviceVersion;
+
+        return $this;
+    }
+
     /**
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -53,12 +69,21 @@ abstract class Request
     public function fire()
     {
         return $this->client->request($this->getMethod(), "{$this->apiBaseUrl}{$this->getApiPath()}", [
-            'headers' => [
-                'Accept' => 'application/vnd.hmrc.1.0+json',
-            ],
+            'headers' => $this->getHeaders(),
         ]);
     }
 
+    protected function getAcceptHeader()
+    {
+        return "application/vnd.hmrc.{$this->serviceVersion}+json";
+    }
+
+    protected function getAuthorizationHeader(string $token)
+    {
+        return "Bearer {$token}";
+    }
+
+    abstract function getHeaders();
     abstract function getMethod();
     abstract function getApiPath();
 }
