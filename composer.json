@@ -8,5 +8,18 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "league/oauth2-client": "^2.4",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "HMRC\\": "src/HMRC/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HMRC\\Tests\\": "tests/"
+        }
+    }
 }
