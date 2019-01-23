@@ -1,0 +1,12 @@
+{
+    "name": "s-patompong/hmrc-api-php",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Patompong Savaengsuk",
+            "email": "p.pangpond@windowslive.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
