@@ -4,24 +4,17 @@
 namespace HMRC\Hello;
 
 
-use HMRC\Request;
+use HMRC\Request\Request;
 
 class HelloWorldRequest extends Request
 {
-    function getMethod()
+    protected function getMethod()
     {
         return parent::METHOD_GET;
     }
 
-    function getApiPath()
+    protected function getApiPath()
     {
         return '/hello/world';
-    }
-
-    function getHeaders()
-    {
-        return [
-            parent::HEADER_ACCEPT => $this->getAcceptHeader(),
-        ];
     }
 }

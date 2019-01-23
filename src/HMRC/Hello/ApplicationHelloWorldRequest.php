@@ -4,34 +4,17 @@
 namespace HMRC\Hello;
 
 
-use HMRC\Request;
+use HMRC\Request\RequestWithServerToken;
 
-class ApplicationHelloWorldRequest extends Request
+class ApplicationHelloWorldRequest extends RequestWithServerToken
 {
-    private $serverToken;
-
-    public function __construct(string $serverToken)
-    {
-        parent::__construct();
-
-        $this->serverToken = $serverToken;
-    }
-
-    function getMethod()
+    protected function getMethod()
     {
         return parent::METHOD_GET;
     }
 
-    function getApiPath()
+    protected function getApiPath()
     {
         return '/hello/application';
-    }
-
-    function getHeaders()
-    {
-        return [
-            parent::HEADER_ACCEPT => $this->getAcceptHeader(),
-            parent::HEADER_AUTHORIZATION => $this->getAuthorizationHeader($this->serverToken),
-        ];
     }
 }

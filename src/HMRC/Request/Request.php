@@ -1,7 +1,7 @@
 <?php
 
 
-namespace HMRC;
+namespace HMRC\Request;
 
 
 use GuzzleHttp\Client;
@@ -83,7 +83,13 @@ abstract class Request
         return "Bearer {$token}";
     }
 
-    abstract function getHeaders();
-    abstract function getMethod();
-    abstract function getApiPath();
+    protected function getHeaders()
+    {
+        return [
+            static::HEADER_ACCEPT => $this->getAcceptHeader(),
+        ];
+    }
+
+    abstract protected function getMethod();
+    abstract protected function getApiPath();
 }

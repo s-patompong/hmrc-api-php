@@ -4,33 +4,16 @@
 namespace HMRC\Hello;
 
 
-use HMRC\Request;
+use HMRC\Request\RequestWithAccessToken;
 
-class UserHelloWorldRequest extends Request
+class UserHelloWorldRequest extends RequestWithAccessToken
 {
-    private $accessToken;
-
-    public function __construct(string $accessToken)
-    {
-        parent::__construct();
-
-        $this->accessToken = $accessToken;
-    }
-
-    function getHeaders()
-    {
-        return [
-            parent::HEADER_ACCEPT => $this->getAcceptHeader(),
-            parent::HEADER_AUTHORIZATION => $this->getAuthorizationHeader($this->accessToken),
-        ];
-    }
-
-    function getMethod()
+    protected function getMethod()
     {
         return parent::METHOD_GET;
     }
 
-    function getApiPath()
+    protected function getApiPath()
     {
         return '/hello/user';
     }

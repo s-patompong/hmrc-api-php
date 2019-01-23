@@ -24,7 +24,7 @@ class Provider extends GenericProvider
      *
      * @throws InvalidEnvironmentException
      */
-    public function __construct(string $environment, string $clientID, string $clientSecret, string $redirectURI, string $callerURL, array $collaborators = [])
+    public function __construct(string $environment, string $clientID, string $clientSecret, string $callbackURI, string $callerURL, array $collaborators = [])
     {
         if (!in_array($environment, [ static::ENV_LIVE, static::ENV_SANDBOX ])) {
             throw new InvalidEnvironmentException("Invalid environment, accept only " . static::ENV_LIVE . " and " . static::ENV_SANDBOX . ".");
@@ -37,13 +37,13 @@ class Provider extends GenericProvider
         $options = array_merge([
             'clientId' => $clientID,
             'clientSecret' => $clientSecret,
-            'redirectUri' => $redirectURI,
+            'redirectUri' => $callbackURI,
         ], $this->optionFromEnvironments($environment));
 
         $_SESSION[ 'environment' ] = $environment;
         $_SESSION[ 'client_id' ] = $clientID;
         $_SESSION[ 'client_secret' ] = $clientSecret;
-        $_SESSION[ 'redirect_uri' ] = $redirectURI;
+        $_SESSION[ 'redirect_uri' ] = $callbackURI;
         $_SESSION[ 'caller' ] = $callerURL;
 
         parent::__construct($options, $collaborators);
