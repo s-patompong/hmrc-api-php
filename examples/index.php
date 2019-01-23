@@ -16,7 +16,7 @@
     </style>
 </head>
 <body class="container">
-<h3>HMRC Examples</h3>
+<h3>HMRC API Examples</h3>
 <hr>
 <div>
     <div class="row">
