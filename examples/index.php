@@ -21,10 +21,10 @@
 <div>
     <div class="row">
         <div class="col-sm">
-            <input type="text" class="form-control" name="client_id" placeholder="Client ID">
+            <input type="text" class="form-control" name="client_id" placeholder="Client ID" value="58Dvv2CAtfe8ZXq0nfCR5qPe7bUa">
         </div>
         <div class="col-sm">
-            <input type="text" class="form-control" name="client_secret" placeholder="Client Secret">
+            <input type="text" class="form-control" name="client_secret" placeholder="Client Secret" value="0833135d-b932-4557-bbdd-7dd8732ea009">
         </div>
         <div class="col-sm">
             <input type="text" class="form-control" name="server_token" placeholder="Server Token">
