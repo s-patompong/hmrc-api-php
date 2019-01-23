@@ -101,4 +101,31 @@ class Provider extends GenericProvider
             'refresh_token' => AccessToken::get()->getRefreshToken(),
         ]);
     }
+
+    /**
+     * @throws InvalidEnvironmentException
+     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     */
+    public static function saveAccessTokenAndRedirectBackToCaller()
+    {
+        // Get provider from session
+        $provider = \HMRC\Oauth2\Provider::newFromSession();
+
+        // Get access token from response URL and save it in access token session
+        \HMRC\Oauth2\AccessToken::set($provider->getAccessTokenFromResponse());
+
+        // Redirect back to caller
+        $provider->redirectToCaller();
+    }
+
+    /**
+     * @return \League\OAuth2\Client\Token\AccessTokenInterface
+     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     */
+    public function getAccessTokenFromResponse()
+    {
+        return $this->getAccessToken('authorization_code', [
+            'code' => $_GET[ 'code' ],
+        ]);
+    }
 }
