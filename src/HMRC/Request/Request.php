@@ -77,9 +77,19 @@ abstract class Request
      */
     public function fire()
     {
-        return $this->client->request($this->getMethod(), $this->getURI(), [
+        return $this->client->request($this->getMethod(), $this->getURI(), $this->getOptions());
+    }
+
+    /**
+     * Get options to call via HTTP client
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
             'headers' => $this->getHeaders(),
-        ]);
+        ];
     }
 
     protected function getAcceptHeader()

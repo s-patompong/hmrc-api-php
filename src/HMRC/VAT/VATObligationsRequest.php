@@ -8,25 +8,22 @@ use HMRC\Helpers\DateChecker;
 use HMRC\Helpers\VariableChecker;
 use HMRC\Request\RequestWithAccessToken;
 
-class VATObligationsRequest extends RequestWithAccessToken
+class VATObligationsRequest extends VATGetRequest
 {
     /** @var array possible statuses, O is open and F is fulfilled */
     const POSSIBLE_STATUSES = [ 'O', 'F' ];
 
-    /** @var string VAT registration number */
-    private $vrn;
-
     /** @var string from */
-    private $from;
+    protected $from;
 
     /** @var string to */
-    private $to;
+    protected $to;
 
     /** @var string status */
-    private $status;
+    protected $status;
 
     /** @var string test scenario */
-    private $govTestScenario;
+    protected $govTestScenario;
 
     /**
      * VATObligationsRequest constructor.
@@ -35,6 +32,7 @@ class VATObligationsRequest extends RequestWithAccessToken
      * @param string $from correct format is YYYY-MM-DD, example 2019-01-25
      * @param string $to correct format is YYYY-MM-DD, example 2019-01-25
      * @param string|null $status correct status is O or F
+     * @param string|null $govTestScenario scenario to test sandbox, see VATObligationsGovTestScenario class for valid scenarios
      *
      * @throws \HMRC\Exceptions\InvalidDateFormatException
      * @throws \HMRC\Exceptions\InvalidVariableValueException
@@ -42,12 +40,11 @@ class VATObligationsRequest extends RequestWithAccessToken
      */
     public function __construct(string $vrn, string $from, string $to, string $status = null, string $govTestScenario = null)
     {
-        parent::__construct();
+        parent::__construct($vrn);
 
         DateChecker::checkDateStringFormat($from, 'Y-m-d');
         DateChecker::checkDateStringFormat($to, 'Y-m-d');
 
-        $this->vrn = $vrn;
         $this->from = $from;
         $this->to = $to;
         $this->status = $status;
@@ -62,35 +59,12 @@ class VATObligationsRequest extends RequestWithAccessToken
         }
     }
 
-    protected function getMethod()
+    protected function getVatApiPath()
     {
-        return parent::METHOD_GET;
+        return "/obligations";
     }
 
-    protected function getApiPath()
-    {
-        return "/organisations/vat/{$this->vrn}/obligations";
-    }
-
-    protected function getURI()
-    {
-        $uri = parent::getURI();
-
-        $queryString = $this->getQueryString();
-
-        return "{$uri}?{$queryString}";
-    }
-
-    protected function getHeaders()
-    {
-        $parentHeaders = parent::getHeaders();
-
-        return array_merge([
-            parent::HEADER_CONTENT_TYPE => parent::HEADER_VALUE_APPLICATION_JSON,
-        ], $parentHeaders);
-    }
-
-    private function getQueryString()
+    protected function getQueryStringArray()
     {
         $queryArray = [
             'from' => $this->from,
@@ -105,23 +79,6 @@ class VATObligationsRequest extends RequestWithAccessToken
             $queryArray['Gov-Test-Scenario'] = $this->govTestScenario;
         }
 
-        return http_build_query($queryArray);
+        return $queryArray;
     }
-
-    private function getValidGovTestScenarios()
-    {
-        return [
-            'QUARTERLY_NONE_MET',
-            'QUARTERLY_ONE_MET',
-            'QUARTERLY_TWO_MET',
-            'QUARTERLY_THREE_MET',
-            'QUARTERLY_FOUR_MET',
-            'MONTHLY_NONE_MET',
-            'MONTHLY_ONE_MET',
-            'MONTHLY_TWO_MET',
-            'MONTHLY_THREE_MET',
-            'NOT_FOUND',
-        ];
-    }
-
 }
