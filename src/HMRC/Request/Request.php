@@ -35,6 +35,9 @@ abstract class Request
     /** @var string Service version of HMRC API */
     protected $serviceVersion = '1.0';
 
+    /** @var string Content type of the request */
+    protected $contentType = 'json';
+
     public function __construct()
     {
         $this->client = new Client;
@@ -75,7 +78,7 @@ abstract class Request
 
     protected function getAcceptHeader()
     {
-        return "application/vnd.hmrc.{$this->serviceVersion}+json";
+        return "application/vnd.hmrc.{$this->serviceVersion}+{$this->contentType}";
     }
 
     protected function getAuthorizationHeader(string $token)

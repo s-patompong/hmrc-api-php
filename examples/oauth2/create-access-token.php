@@ -4,6 +4,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 require_once __DIR__ . "/../helpers.php";
 
 use HMRC\Oauth2\Provider;
+use HMRC\Scope\Scope;
 
 
 if (!isset($_GET[ 'client_id' ]) || !isset($_GET[ 'client_secret' ])) {
@@ -21,5 +22,5 @@ $provider = new Provider(
     "{$baseURL}/examples/oauth2/callback.php",
     "/examples/index.php"
 );
-$scope = [ 'hello' ];
+$scope = [ Scope::VAT_READ, Scope::HELLO ];
 $provider->redirectToAuthorizationURL($scope);

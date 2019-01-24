@@ -60,10 +60,10 @@ class Provider extends GenericProvider
         ];
     }
 
-    public function redirectToAuthorizationURL(array $scope)
+    public function redirectToAuthorizationURL(array $scopes)
     {
         $authorizationUrl = $this->getAuthorizationUrl([
-            'scope' => $scope,
+            'scope' => implode(" ", $scopes),
         ]);
 
         header('Location: ' . $authorizationUrl);

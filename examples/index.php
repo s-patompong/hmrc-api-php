@@ -64,7 +64,7 @@ $serverToken = 'servertoken';
 
 <div id="features">
     <div>
-        <h5>1. Hello world</h5>
+        <h5>Hello world</h5>
         <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world.php')">
             <button class="btn btn-sm btn-primary">Test</button>
         </a>
@@ -72,7 +72,7 @@ $serverToken = 'servertoken';
     <hr>
 
     <div>
-        <h5>2. Hello world application <span class="badge badge-danger">Server Token</span></h5>
+        <h5>Hello world application <span class="badge badge-danger">Server Token</span></h5>
         <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-application.php')">
             <button class="btn btn-sm btn-primary">Test</button>
         </a>
@@ -80,7 +80,7 @@ $serverToken = 'servertoken';
     <hr>
 
     <div>
-        <h5>3. Hello world user <span class="badge badge-danger">Client ID</span> <span class="badge badge-danger">Client Secret</span>
+        <h5>Hello world user <span class="badge badge-danger">Client ID</span> <span class="badge badge-danger">Client Secret</span>
         </h5>
         <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-user.php')">
             <button class="btn btn-sm btn-primary">Test</button>
