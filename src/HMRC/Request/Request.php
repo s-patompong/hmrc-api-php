@@ -64,13 +64,6 @@ abstract class Request
         return $this;
     }
 
-    public function setServiceVersion(int $serviceVersion)
-    {
-        $this->serviceVersion = $serviceVersion;
-
-        return $this;
-    }
-
     /**
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -112,6 +105,66 @@ abstract class Request
     protected function getURI()
     {
         return "{$this->apiBaseUrl}{$this->getApiPath()}";
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiBaseUrl(): string
+    {
+        return $this->apiBaseUrl;
+    }
+
+    /**
+     * @param string $apiBaseUrl
+     *
+     * @return Request
+     */
+    public function setApiBaseUrl(string $apiBaseUrl): Request
+    {
+        $this->apiBaseUrl = $apiBaseUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getServiceVersion(): string
+    {
+        return $this->serviceVersion;
+    }
+
+    /**
+     * @param string $serviceVersion
+     *
+     * @return Request
+     */
+    public function setServiceVersion(string $serviceVersion): Request
+    {
+        $this->serviceVersion = $serviceVersion;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType(): string
+    {
+        return $this->contentType;
+    }
+
+    /**
+     * @param string $contentType
+     *
+     * @return Request
+     */
+    public function setContentType(string $contentType): Request
+    {
+        $this->contentType = $contentType;
+
+        return $this;
     }
 
     abstract protected function getMethod();
