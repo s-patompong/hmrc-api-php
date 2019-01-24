@@ -14,6 +14,9 @@ class AccessToken
         return isset($_SESSION[ 'access_token' ]);
     }
 
+    /**
+     * @return AccessTokenInterface|null
+     */
     public static function get()
     {
         return isset($_SESSION[ 'access_token' ]) ? unserialize($_SESSION[ 'access_token' ]) : null;

@@ -85,7 +85,7 @@ $vatObligationGovTestScenario = '';
                 <tr>
                     <td>Hello world</td>
                     <td class="test-btn">
-                        <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world.php')">
+                        <a href='/examples/hello/hello-world.php'>
                             <button class="btn btn-sm btn-primary">Test</button>
                         </a>
                     </td>
@@ -93,7 +93,7 @@ $vatObligationGovTestScenario = '';
                 <tr>
                     <td>Hello world application <span class="badge badge-danger">Server Token</span></td>
                     <td class="test-btn">
-                        <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-application.php')">
+                        <a href="javascript:void(0)" onclick="helloWorldApplication()">
                             <button class="btn btn-sm btn-primary">Test</button>
                         </a>
                     </td>
@@ -103,7 +103,7 @@ $vatObligationGovTestScenario = '';
                         Hello world user
                     </td>
                     <td class="test-btn">
-                        <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-user.php')">
+                        <a href='/examples/hello/hello-world-user.php'>
                             <button class="btn btn-sm btn-primary">Test</button>
                         </a>
                     </td>
@@ -127,7 +127,8 @@ $vatObligationGovTestScenario = '';
                         <p>Retrieve VAT obligations</p>
                         <div class="form-group">
                             <input type="text" class="form-control" name="vat_obligations_from"
-                                   placeholder="From: yyyy-mm-dd (2019-01-25)" value="<?php echo $vatObligationFrom; ?>">
+                                   placeholder="From: yyyy-mm-dd (2019-01-25)"
+                                   value="<?php echo $vatObligationFrom; ?>">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="vat_obligations_to"
@@ -183,23 +184,16 @@ $vatObligationGovTestScenario = '';
         }
     });
 
-    function openPage(link) {
-        const clientId = $("input[name='client_id']").val();
-        const clientSecret = $("input[name='client_secret']").val();
+    function helloWorldApplication() {
         const serverToken = $("input[name='server_token']").val();
 
         let query = [];
-
-        if (clientId !== "") query.push(`client_id=${clientId}`);
-        if (clientSecret !== "") query.push(`client_secret=${clientSecret}`);
         if (serverToken !== "") query.push(`server_token=${serverToken}`);
-
         const queryString = query.join('&');
-
         if (query.length) {
-            location.href = link + '?' + queryString;
+            location.href = '/examples/hello/hello-world-application.php' + '?' + queryString;
         } else {
-            location.href = link;
+            location.href = '/examples/hello/hello-world-application.php';
         }
     }
 
@@ -217,9 +211,7 @@ $vatObligationGovTestScenario = '';
         if (to !== "") query.push(`to=${to}`);
         if (status !== "") query.push(`status=${status}`);
         if (govTestScenario !== "") query.push(`gov_test_scenario=${govTestScenario}`);
-
         const queryString = query.join('&');
-
         if (query.length) {
             location.href = "/examples/vat/get-vat-obligations.php" + '?' + queryString;
         } else {
