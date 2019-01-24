@@ -12,6 +12,12 @@ $clientId = 'clientid';
 $clientSecret = 'clientsecret';
 $serverToken = 'servertoken';
 
+$vrn = '666969555';
+$vatObligationFrom = '2018-01-01';
+$vatObligationTo = '2019-01-01';
+$vatObligationStatus = '';
+$vatObligationGovTestScenario = '';
+
 ?>
 
 <!doctype html>
