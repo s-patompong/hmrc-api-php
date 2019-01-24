@@ -1,7 +1,6 @@
 <?php
 
 use HMRC\Hello\UserHelloWorldRequest;
-use HMRC\Oauth2\AccessToken;
 
 session_start();
 

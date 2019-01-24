@@ -4,8 +4,6 @@
 namespace HMRC\VAT;
 
 
-use HMRC\Request\RequestWithAccessToken;
-
 abstract class VATGetRequest extends VATRequest
 {
     protected function getURI()

@@ -19,7 +19,10 @@ class Provider extends GenericProvider
      * Provider constructor.
      *
      * @param string $environment
-     * @param array $options
+     * @param string $clientID
+     * @param string $clientSecret
+     * @param string $callbackURI
+     * @param string $callerURL
      * @param array $collaborators
      *
      * @throws InvalidEnvironmentException
@@ -109,10 +112,10 @@ class Provider extends GenericProvider
     public static function saveAccessTokenAndRedirectBackToCaller()
     {
         // Get provider from session
-        $provider = \HMRC\Oauth2\Provider::newFromSession();
+        $provider = static::newFromSession();
 
         // Get access token from response URL and save it in access token session
-        \HMRC\Oauth2\AccessToken::set(serialize($provider->getAccessTokenFromResponse()));
+        AccessToken::set(serialize($provider->getAccessTokenFromResponse()));
 
         // Redirect back to caller
         $provider->redirectToCaller();
