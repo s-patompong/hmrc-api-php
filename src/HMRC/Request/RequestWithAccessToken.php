@@ -15,11 +15,11 @@ abstract class RequestWithAccessToken extends Request
     /** @var AccessTokenInterface */
     protected $accessToken;
 
-    public function __construct($accessToken)
+    public function __construct()
     {
         parent::__construct();
 
-        $this->accessToken = $accessToken;
+        $this->accessToken = AccessToken::get();
     }
 
     /**

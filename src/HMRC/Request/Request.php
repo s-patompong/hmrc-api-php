@@ -26,6 +26,12 @@ abstract class Request
     /** @var string authorization header for request */
     const HEADER_AUTHORIZATION = 'Authorization';
 
+    /** @var string content type for request */
+    const HEADER_CONTENT_TYPE = 'Content-Type';
+
+    /** @var string header value application/json */
+    const HEADER_VALUE_APPLICATION_JSON = 'application/json';
+
     /** @var Client Guzzle client */
     protected $client;
 
@@ -71,7 +77,7 @@ abstract class Request
      */
     public function fire()
     {
-        return $this->client->request($this->getMethod(), "{$this->apiBaseUrl}{$this->getApiPath()}", [
+        return $this->client->request($this->getMethod(), $this->getURI(), [
             'headers' => $this->getHeaders(),
         ]);
     }
@@ -91,6 +97,11 @@ abstract class Request
         return [
             static::HEADER_ACCEPT => $this->getAcceptHeader(),
         ];
+    }
+
+    protected function getURI()
+    {
+        return "{$this->apiBaseUrl}{$this->getApiPath()}";
     }
 
     abstract protected function getMethod();
