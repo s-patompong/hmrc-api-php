@@ -8,6 +8,10 @@ session_start();
 
 $accessToken = AccessToken::get();
 
+$clientId = 'clientid';
+$clientSecret = 'clientsecret';
+$serverToken = 'servertoken';
+
 ?>
 
 <!doctype html>
@@ -35,14 +39,15 @@ $accessToken = AccessToken::get();
     <div class="row">
         <div class="col-sm">
             <input type="text" class="form-control" name="client_id" placeholder="Client ID"
-                   value="58Dvv2CAtfe8ZXq0nfCR5qPe7bUa">
+                   value="<?php echo $clientId; ?>">
         </div>
         <div class="col-sm">
             <input type="text" class="form-control" name="client_secret" placeholder="Client Secret"
-                   value="0833135d-b932-4557-bbdd-7dd8732ea009">
+                   value="<?php echo $clientSecret; ?>">
         </div>
         <div class="col-sm">
-            <input type="text" class="form-control" name="server_token" placeholder="Server Token">
+            <input type="text" class="form-control" name="server_token" placeholder="Server Token"
+                   value="<?php echo $serverToken; ?>">
         </div>
     </div>
 </div>
@@ -50,8 +55,10 @@ $accessToken = AccessToken::get();
 <div style="margin-top: 10px">
     <input type="hidden" name="access_token" value="<?php echo AccessToken::get(); ?>">
     <div id="access-token-container"></div>
-    <a href="javascript:void(0)" onclick="openPage('/examples/oauth2/create-access-token.php')" class="btn btn-sm btn-warning" style="margin-top: 10px" id="create-access-token-btn">Create access token</a>
-    <a href="/examples/oauth2/destroy-session.php" class="btn btn-sm btn-danger" style="margin-top: 10px" id="destroy-session-btn">Destroy session</a>
+    <a href="javascript:void(0)" onclick="openPage('/examples/oauth2/create-access-token.php')"
+       class="btn btn-sm btn-warning" style="margin-top: 10px" id="create-access-token-btn">Create access token</a>
+    <a href="/examples/oauth2/destroy-session.php" class="btn btn-sm btn-danger" style="margin-top: 10px"
+       id="destroy-session-btn">Destroy session</a>
 </div>
 <hr>
 
@@ -95,14 +102,14 @@ $accessToken = AccessToken::get();
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script>
-    $(function() {
+    $(function () {
         const accessToken = $("input[name='access_token']").val();
         const features = $("#features");
         let accessTokenContainer = $("#access-token-container");
         let createAccessTokenBtn = $("#create-access-token-btn");
         let destroySessionBtn = $("#destroy-session-btn");
 
-        if(accessToken === "") { // Doesn't have access token
+        if (accessToken === "") { // Doesn't have access token
             accessTokenContainer.text("Access Token: Doesn't exists.");
             destroySessionBtn.hide();
             features.hide();
