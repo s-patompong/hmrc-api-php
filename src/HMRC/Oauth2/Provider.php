@@ -112,7 +112,7 @@ class Provider extends GenericProvider
         $provider = \HMRC\Oauth2\Provider::newFromSession();
 
         // Get access token from response URL and save it in access token session
-        \HMRC\Oauth2\AccessToken::set($provider->getAccessTokenFromResponse());
+        \HMRC\Oauth2\AccessToken::set(serialize($provider->getAccessTokenFromResponse()));
 
         // Redirect back to caller
         $provider->redirectToCaller();

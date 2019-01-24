@@ -1,3 +1,15 @@
+<?php
+
+require_once __DIR__ . "/../vendor/autoload.php";
+
+use HMRC\Oauth2\AccessToken;
+
+session_start();
+
+$accessToken = AccessToken::get();
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,7 +18,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>HMRC API Examples</title>
     <style>
@@ -21,47 +34,84 @@
 <div>
     <div class="row">
         <div class="col-sm">
-            <input type="text" class="form-control" name="client_id" placeholder="Client ID" value="58Dvv2CAtfe8ZXq0nfCR5qPe7bUa">
+            <input type="text" class="form-control" name="client_id" placeholder="Client ID"
+                   value="58Dvv2CAtfe8ZXq0nfCR5qPe7bUa">
         </div>
         <div class="col-sm">
-            <input type="text" class="form-control" name="client_secret" placeholder="Client Secret" value="0833135d-b932-4557-bbdd-7dd8732ea009">
+            <input type="text" class="form-control" name="client_secret" placeholder="Client Secret"
+                   value="0833135d-b932-4557-bbdd-7dd8732ea009">
         </div>
         <div class="col-sm">
             <input type="text" class="form-control" name="server_token" placeholder="Server Token">
         </div>
     </div>
 </div>
-<hr>
-<div>
-    <h5>1. Hello world</h5>
-    <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world.php')">
-        <button class="btn btn-sm btn-primary">Test</button>
-    </a>
+
+<div style="margin-top: 10px">
+    <input type="hidden" name="access_token" value="<?php echo AccessToken::get(); ?>">
+    <div id="access-token-container"></div>
+    <a href="javascript:void(0)" onclick="openPage('/examples/oauth2/create-access-token.php')" class="btn btn-sm btn-warning" style="margin-top: 10px" id="create-access-token-btn">Create access token</a>
+    <a href="/examples/oauth2/destroy-session.php" class="btn btn-sm btn-danger" style="margin-top: 10px" id="destroy-session-btn">Destroy session</a>
 </div>
 <hr>
 
-<div>
-    <h5>2. Hello world application <span class="badge badge-danger">Server Token</span></h5>
-    <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-application.php')">
-        <button class="btn btn-sm btn-primary">Test</button>
-    </a>
-</div>
-<hr>
+<div id="features">
+    <div>
+        <h5>1. Hello world</h5>
+        <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world.php')">
+            <button class="btn btn-sm btn-primary">Test</button>
+        </a>
+    </div>
+    <hr>
 
-<div>
-    <h5>3. Hello world user <span class="badge badge-danger">Client ID</span> <span class="badge badge-danger">Client Secret</span></h5>
-    <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-user.php')">
-        <button class="btn btn-sm btn-primary">Test</button>
-    </a>
+    <div>
+        <h5>2. Hello world application <span class="badge badge-danger">Server Token</span></h5>
+        <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-application.php')">
+            <button class="btn btn-sm btn-primary">Test</button>
+        </a>
+    </div>
+    <hr>
+
+    <div>
+        <h5>3. Hello world user <span class="badge badge-danger">Client ID</span> <span class="badge badge-danger">Client Secret</span>
+        </h5>
+        <a href="javascript:void(0)" onclick="openPage('/examples/hello/hello-world-user.php')">
+            <button class="btn btn-sm btn-primary">Test</button>
+        </a>
+    </div>
+    <hr>
 </div>
-<hr>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <script>
+    $(function() {
+        const accessToken = $("input[name='access_token']").val();
+        const features = $("#features");
+        let accessTokenContainer = $("#access-token-container");
+        let createAccessTokenBtn = $("#create-access-token-btn");
+        let destroySessionBtn = $("#destroy-session-btn");
+
+        if(accessToken === "") { // Doesn't have access token
+            accessTokenContainer.text("Access Token: Doesn't exists.");
+            destroySessionBtn.hide();
+            features.hide();
+        } else {
+            createAccessTokenBtn.hide();
+            accessTokenContainer.text("Access Token: " + accessToken);
+        }
+    });
+
     function openPage(link) {
         const clientId = $("input[name='client_id']").val();
         const clientSecret = $("input[name='client_secret']").val();
@@ -69,21 +119,21 @@
 
         let query = [];
 
-        if(clientId !== "") {
+        if (clientId !== "") {
             query.push(`client_id=${clientId}`);
         }
 
-        if(clientSecret !== "") {
+        if (clientSecret !== "") {
             query.push(`client_secret=${clientSecret}`);
         }
 
-        if(serverToken !== "") {
+        if (serverToken !== "") {
             query.push(`server_token=${serverToken}`);
         }
 
         const queryString = query.join('&');
 
-        if(query.length) {
+        if (query.length) {
             location.href = link + '?' + queryString;
         } else {
             location.href = link;

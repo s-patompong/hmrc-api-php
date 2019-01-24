@@ -4,6 +4,7 @@
 namespace HMRC\Oauth2;
 
 
+use HMRC\Exceptions\HMRCException;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class AccessToken
@@ -13,20 +14,28 @@ class AccessToken
         return isset($_SESSION[ 'access_token' ]);
     }
 
-    public static function get(): AccessTokenInterface
+    public static function get()
     {
-        return $_SESSION[ 'access_token' ];
+        return isset($_SESSION[ 'access_token' ]) ? unserialize($_SESSION[ 'access_token' ]) : null;
     }
 
-    public static function set(AccessTokenInterface $accessToken)
+    public static function set(string $serializedAccessToken)
     {
-        $_SESSION[ 'access_token' ] = $accessToken;
+        $_SESSION[ 'access_token' ] = $serializedAccessToken;
     }
 
+    /**
+     * @return bool
+     * @throws HMRCException
+     */
     public static function hasExpired()
     {
         /** @var \League\OAuth2\Client\Token\AccessToken $accessToken */
-        $accessToken = static::get();
+        $accessToken = self::get();
+
+        if(is_null($accessToken)) {
+            throw new HMRCException("Access token doesn't exists.");
+        }
 
         return $accessToken->hasExpired();
     }

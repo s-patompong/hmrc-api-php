@@ -15,7 +15,7 @@ abstract class RequestWithAccessToken extends Request
     /** @var AccessTokenInterface */
     protected $accessToken;
 
-    public function __construct(AccessTokenInterface $accessToken)
+    public function __construct($accessToken)
     {
         parent::__construct();
 
