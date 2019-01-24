@@ -7,7 +7,6 @@ namespace HMRC\Request;
 use HMRC\Exceptions;
 use HMRC\Oauth2\AccessToken;
 use HMRC\Oauth2\Provider;
-use HMRC\Request\Request;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
 abstract class RequestWithAccessToken extends Request

@@ -22,5 +22,5 @@ $provider = new Provider(
     "{$baseURL}/examples/oauth2/callback.php",
     "/examples/index.php"
 );
-$scope = [ Scope::VAT_READ, Scope::HELLO ];
+$scope = [ Scope::VAT_READ, Scope::HELLO, Scope::VAT_WRITE ];
 $provider->redirectToAuthorizationURL($scope);

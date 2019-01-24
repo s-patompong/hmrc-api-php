@@ -18,6 +18,16 @@ $vatObligationTo = '2019-01-01';
 $vatObligationStatus = '';
 $vatObligationGovTestScenario = '';
 
+$submitVatReturnVatDueSales = 105.50;
+$submitVatReturnVatDueAcquisitions = -100.45;
+$submitVatReturnTotalVatDue = 5.05;
+$submitVatReturnVatReclaimedCurrPeriod = 105.15;
+$submitVatReturnNetVatDue = 100.10;
+$submitVatReturnTotalValueSalesExVAT = 300;
+$submitVatReturnTotalValuePurchasesExVAT = 300;
+$submitVatReturnTotalValueGoodsSuppliedExVAT = 3000;
+$submitVatReturnTotalAcquisitionsExVAT = 3000;
+
 ?>
 
 <!doctype html>
@@ -70,7 +80,7 @@ $vatObligationGovTestScenario = '';
 <div style="margin-top: 10px">
     <input type="hidden" name="access_token" value="<?php echo AccessToken::get(); ?>">
     <div id="access-token-container"></div>
-    <a href="javascript:void(0)" onclick="openPage('/examples/oauth2/create-access-token.php')"
+    <a href="javascript:void(0)" onclick="authorize()"
        class="btn btn-sm btn-warning" style="margin-top: 10px" id="create-access-token-btn">Create access token</a>
     <a href="/examples/oauth2/destroy-session.php" class="btn btn-sm btn-danger" style="margin-top: 10px"
        id="destroy-session-btn">Destroy session</a>
@@ -149,6 +159,64 @@ $vatObligationGovTestScenario = '';
                         </a>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <p>Submit VAT return for period</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="submit_vat_return_period_key"
+                                   placeholder="Period Key">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_vat_due_sale"
+                                   placeholder="VAT Due Sales" value="<?php echo $submitVatReturnVatDueSales; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_vat_due_acquisitions"
+                                   placeholder="VAT Due Acquisitions" value="<?php echo $submitVatReturnVatDueAcquisitions; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_total_vat_due"
+                                   placeholder="Total VAT Due" value="<?php echo $submitVatReturnTotalVatDue; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_vat_reclaimed_curr_period"
+                                   placeholder="VAT Reclaimed CURR Period" value="<?php echo $submitVatReturnVatReclaimedCurrPeriod; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_net_vat_due"
+                                   placeholder="NET VAT Due" value="<?php echo $submitVatReturnNetVatDue; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_total_value_sales_ex_vat"
+                                   placeholder="Total Value Sales EX VAT" value="<?php echo $submitVatReturnTotalValueSalesExVAT; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control"
+                                   name="submit_vat_return_total_value_purchases_ex_vat"
+                                   placeholder="Total Value Purchases EX VAT" value="<?php echo $submitVatReturnTotalValuePurchasesExVAT; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control"
+                                   name="submit_vat_return_total_value_goods_supplied_ex_vat"
+                                   placeholder="Total Value Goods Supplied EX VAT" value="<?php echo $submitVatReturnTotalValueGoodsSuppliedExVAT; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="submit_vat_return_total_acquisitions_ex_vat"
+                                   placeholder="Total Acquisitions EX VAT" value="<?php echo $submitVatReturnTotalAcquisitionsExVAT; ?>">
+                        </div>
+                        <div class="form-group">
+                            <select name="submit_vat_return_finalised" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td class="test-btn">
+                        <a href="javascript:void(0)" onclick="submitVATReturn()">
+                            <button class="btn btn-sm btn-primary">Test</button>
+                        </a>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -184,6 +252,21 @@ $vatObligationGovTestScenario = '';
         }
     });
 
+    function authorize() {
+        const clientId = $("input[name='client_id']").val();
+        const clientSecret = $("input[name='client_secret']").val();
+
+        let query = [];
+        if (clientId !== "") query.push(`client_id=${clientId}`);
+        if (clientSecret !== "") query.push(`client_secret=${clientSecret}`);
+        const queryString = query.join('&');
+        if (query.length) {
+            location.href = '/examples/oauth2/create-access-token.php' + '?' + queryString;
+        } else {
+            location.href = '/examples/oauth2/create-access-token.php';
+        }
+    }
+
     function helloWorldApplication() {
         const serverToken = $("input[name='server_token']").val();
 
@@ -216,6 +299,41 @@ $vatObligationGovTestScenario = '';
             location.href = "/examples/vat/get-vat-obligations.php" + '?' + queryString;
         } else {
             location.href = "/examples/vat/get-vat-obligations.php";
+        }
+    }
+
+    function submitVATReturn() {
+        const vrn = $("input[name='vrn']").val();
+        const periodKey = $("input[name='submit_vat_return_period_key']").val();
+        const vatDueSale = $("input[name='submit_vat_return_vat_due_sale']").val();
+        const vatDueAcquisitions = $("input[name='submit_vat_return_vat_due_acquisitions']").val();
+        const totalVatDue = $("input[name='submit_vat_return_total_vat_due']").val();
+        const vatReclaimedCurrPeriod = $("input[name='submit_vat_return_vat_reclaimed_curr_period']").val();
+        const NetVatDue = $("input[name='submit_vat_return_net_vat_due']").val();
+        const totalValueSalesEXVat = $("input[name='submit_vat_return_total_value_sales_ex_vat']").val();
+        const totalValuePurchasesEXVat = $("input[name='submit_vat_return_total_value_purchases_ex_vat']").val();
+        const totalValueGoodsSuppliedEXVat = $("input[name='submit_vat_return_total_value_goods_supplied_ex_vat']").val();
+        const totalAcquisitionsEXVat = $("input[name='submit_vat_return_total_acquisitions_ex_vat']").val();
+        const finalised = $("select[name='submit_vat_return_finalised']").val();
+
+        let query = [];
+        if (vrn !== "") query.push(`vrn=${vrn}`);
+        if (periodKey !== "") query.push(`period_key=${periodKey}`);
+        if (vatDueSale !== "") query.push(`vat_due_sale=${vatDueSale}`);
+        if (vatDueAcquisitions !== "") query.push(`vat_due_acquisitions=${vatDueAcquisitions}`);
+        if (totalVatDue !== "") query.push(`total_vat_due=${totalVatDue}`);
+        if (vatReclaimedCurrPeriod !== "") query.push(`vat_reclaimed_curr_period=${vatReclaimedCurrPeriod}`);
+        if (NetVatDue !== "") query.push(`net_vat_due=${NetVatDue}`);
+        if (totalValueSalesEXVat !== "") query.push(`total_value_sales_ex_vat=${totalValueSalesEXVat}`);
+        if (totalValuePurchasesEXVat !== "") query.push(`total_value_purchases_ex_vat=${totalValuePurchasesEXVat}`);
+        if (totalValueGoodsSuppliedEXVat !== "") query.push(`total_value_goods_supplied_ex_vat=${totalValueGoodsSuppliedEXVat}`);
+        if (totalAcquisitionsEXVat !== "") query.push(`total_acquisitions_ex_vat=${totalAcquisitionsEXVat}`);
+        if (finalised !== "") query.push(`finalised=${finalised}`);
+        const queryString = query.join('&');
+        if (query.length) {
+            location.href = "/examples/vat/submit-vat-return.php" + '?' + queryString;
+        } else {
+            location.href = "/examples/vat/submit-vat-return.php";
         }
     }
 </script>

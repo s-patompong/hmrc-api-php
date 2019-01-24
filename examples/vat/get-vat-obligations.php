@@ -12,5 +12,5 @@ if(!isset($_GET['vrn']) || !isset($_GET['from']) || !isset($_GET['to'])) {
 $status = isset($_GET['status']) ? $_GET['status'] : null;
 $govTestScenario = isset($_GET['gov_test_scenario']) ? $_GET['gov_test_scenario'] : null;
 
-$request = new \HMRC\VAT\VATObligationsRequest("666969555", "2018-01-01", "2019-01-01", $status, $govTestScenario);
+$request = new \HMRC\VAT\RetrieveVATObligationsRequest($_GET['vrn'], $_GET['from'], $_GET['to'], $status, $govTestScenario);
 $response = $request->fire();

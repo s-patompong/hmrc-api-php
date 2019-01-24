@@ -6,7 +6,7 @@ namespace HMRC\VAT;
 
 use ReflectionClass;
 
-class VATObligationsGovTestScenario
+class RetrieveVATObligationsGovTestScenario
 {
     /**
      * Simulates the scenario where the client has quarterly obligations and one is fulfilled

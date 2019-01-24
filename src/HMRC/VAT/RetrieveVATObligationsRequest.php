@@ -6,9 +6,8 @@ namespace HMRC\VAT;
 
 use HMRC\Helpers\DateChecker;
 use HMRC\Helpers\VariableChecker;
-use HMRC\Request\RequestWithAccessToken;
 
-class VATObligationsRequest extends VATGetRequest
+class RetrieveVATObligationsRequest extends VATGetRequest
 {
     /** @var array possible statuses, O is open and F is fulfilled */
     const POSSIBLE_STATUSES = [ 'O', 'F' ];
@@ -55,7 +54,7 @@ class VATObligationsRequest extends VATGetRequest
         }
 
         if(!is_null($this->govTestScenario)) {
-            VariableChecker::checkPossibleValue($govTestScenario, VATObligationsGovTestScenario::getValidGovTestScenarios());
+            VariableChecker::checkPossibleValue($govTestScenario, RetrieveVATObligationsGovTestScenario::getValidGovTestScenarios());
         }
     }
 
