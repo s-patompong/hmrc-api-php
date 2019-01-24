@@ -9,6 +9,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": "^7.1",
         "league/oauth2-client": "^2.4",
         "guzzlehttp/guzzle": "^6.3"
     },
