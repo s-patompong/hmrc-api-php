@@ -45,6 +45,7 @@ class GovernmentTestScenarioTest extends TestCase
     public function testItDoesNotThrowExceptionWithWrongScenario()
     {
         $this->stub->checkValid(StubGovTestScenario::SIMPLE_CASE);
+
         $this->addToAssertionCount(1);
     }
 }

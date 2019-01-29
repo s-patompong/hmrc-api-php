@@ -36,6 +36,7 @@ class EnvironmentTest extends TestCase
     public function testCanSetCorrectEnv()
     {
         $this->environment->setEnv(Environment::LIVE);
+
         $this->addToAssertionCount(1);
     }
 
