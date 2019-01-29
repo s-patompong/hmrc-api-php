@@ -37,5 +37,6 @@ $request->setTotalAcquisitionsExVAT($_GET['total_acquisitions_ex_vat']);
 $request->setFinalised($finalised);
 
 $response = $request->fire();
+
 header("Content-Type: application/json");
 echo $response->getBody();

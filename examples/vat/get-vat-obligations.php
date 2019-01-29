@@ -14,5 +14,6 @@ $govTestScenario = isset($_GET['gov_test_scenario']) ? $_GET['gov_test_scenario'
 
 $request = new \HMRC\VAT\RetrieveVATObligationsRequest($_GET['vrn'], $_GET['from'], $_GET['to'], $status, $govTestScenario);
 $response = $request->fire();
+
 header("Content-Type: application/json");
 echo $response->getBody();
