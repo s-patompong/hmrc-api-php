@@ -15,9 +15,11 @@ abstract class GovernmentTestScenario
      */
     public function getValidGovTestScenarios(): array
     {
-        $oClass = new ReflectionClass(__CLASS__);
+        $oClass = new ReflectionClass(static::class);
 
-        return array_values($oClass->getConstants());
+        $constants = $oClass->getConstants();
+
+        return array_values($constants);
     }
 
     /**
