@@ -23,12 +23,12 @@ abstract class VATRequest extends RequestWithAccessToken
         $this->vrn = $vrn;
     }
 
-    protected function getApiPath()
+    protected function getApiPath(): string
     {
         return "/organisations/vat/{$this->vrn}" . $this->getVatApiPath();
     }
 
-    protected function getHeaders()
+    protected function getHeaders(): array
     {
         $ownHeaders = [
             parent::HEADER_CONTENT_TYPE => parent::HEADER_VALUE_APPLICATION_JSON,
@@ -79,5 +79,5 @@ abstract class VATRequest extends RequestWithAccessToken
      *
      * @return string
      */
-    abstract protected function getVatApiPath();
+    abstract protected function getVatApiPath(): string;
 }

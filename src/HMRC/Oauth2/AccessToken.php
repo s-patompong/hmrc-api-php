@@ -9,7 +9,7 @@ use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class AccessToken
 {
-    public static function exists()
+    public static function exists(): bool
     {
         return isset($_SESSION[ 'access_token' ]);
     }
@@ -31,7 +31,7 @@ class AccessToken
      * @return bool
      * @throws HMRCException
      */
-    public static function hasExpired()
+    public static function hasExpired(): bool
     {
         /** @var \League\OAuth2\Client\Token\AccessToken $accessToken */
         $accessToken = self::get();

@@ -46,7 +46,7 @@ class SubmitVATReturnRequest extends VATPostRequest
         parent::__construct($vrn);
     }
 
-    protected function getVatApiPath()
+    protected function getVatApiPath(): string
     {
         return '/returns';
     }
@@ -59,7 +59,7 @@ class SubmitVATReturnRequest extends VATPostRequest
         return $this->periodKey;
     }
 
-    protected function getVATPostOptions()
+    protected function getVATPostBody(): array
     {
         return [
             "periodKey" => $this->periodKey,
@@ -76,7 +76,7 @@ class SubmitVATReturnRequest extends VATPostRequest
         ];
     }
 
-    protected function getRequiredClassAttributes()
+    protected function getRequiredClassAttributes(): array
     {
         return [
             'periodKey',

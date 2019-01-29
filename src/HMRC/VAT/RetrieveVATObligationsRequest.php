@@ -49,12 +49,12 @@ class RetrieveVATObligationsRequest extends VATGetRequest
         }
     }
 
-    protected function getVatApiPath()
+    protected function getVatApiPath(): string
     {
         return "/obligations";
     }
 
-    protected function getQueryStringArray()
+    protected function getQueryString(): array
     {
         $queryArray = [
             'from' => $this->from,

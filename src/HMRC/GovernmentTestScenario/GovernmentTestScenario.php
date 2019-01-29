@@ -13,7 +13,7 @@ abstract class GovernmentTestScenario
      * @return array
      * @throws \ReflectionException
      */
-    public function getValidGovTestScenarios()
+    public function getValidGovTestScenarios(): array
     {
         $oClass = new ReflectionClass(__CLASS__);
 

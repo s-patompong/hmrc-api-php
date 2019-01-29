@@ -16,7 +16,7 @@ abstract class RequestWithServerToken extends Request
         $this->serverToken = $serverToken;
     }
 
-    protected function getHeaders()
+    protected function getHeaders(): array
     {
         return [
             parent::HEADER_ACCEPT => $this->getAcceptHeader(),

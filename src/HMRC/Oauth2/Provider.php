@@ -6,6 +6,7 @@ namespace HMRC\Oauth2;
 
 use HMRC\Exceptions\InvalidEnvironmentException;
 use League\OAuth2\Client\Provider\GenericProvider;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class Provider extends GenericProvider
 {
@@ -52,7 +53,7 @@ class Provider extends GenericProvider
         parent::__construct($options, $collaborators);
     }
 
-    private function optionFromEnvironments(string $environment)
+    private function optionFromEnvironments(string $environment): array
     {
         $subDomain = $environment == static::ENV_LIVE ? 'api' : 'test-api';
 
@@ -77,7 +78,7 @@ class Provider extends GenericProvider
      * @return Provider
      * @throws InvalidEnvironmentException
      */
-    public static function newFromSession()
+    public static function newFromSession(): Provider
     {
         return new static(
             $_SESSION[ 'environment' ],
@@ -98,7 +99,7 @@ class Provider extends GenericProvider
      * @return \League\OAuth2\Client\Token\AccessTokenInterface
      * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
      */
-    public function refreshToken()
+    public function refreshToken(): AccessTokenInterface
     {
         return $this->getAccessToken('refresh_token', [
             'refresh_token' => AccessToken::get()->getRefreshToken(),
@@ -125,7 +126,7 @@ class Provider extends GenericProvider
      * @return \League\OAuth2\Client\Token\AccessTokenInterface
      * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
      */
-    public function getAccessTokenFromResponse()
+    public function getAccessTokenFromResponse(): AccessTokenInterface
     {
         return $this->getAccessToken('authorization_code', [
             'code' => $_GET[ 'code' ],

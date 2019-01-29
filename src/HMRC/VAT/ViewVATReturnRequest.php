@@ -21,12 +21,12 @@ class ViewVATReturnRequest extends VATGetRequest
     /**
      * @return array
      */
-    protected function getQueryStringArray()
+    protected function getQueryString(): array
     {
         return [];
     }
 
-    protected function getVatApiPath()
+    protected function getVatApiPath(): string
     {
         return "/returns/{$this->periodKey}";
     }

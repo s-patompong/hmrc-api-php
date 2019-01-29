@@ -13,7 +13,7 @@ abstract class VATPostRequest extends VATRequest
         parent::__construct($vrn);
     }
 
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return parent::METHOD_POST;
     }
@@ -32,11 +32,11 @@ abstract class VATPostRequest extends VATRequest
         return parent::fire();
     }
 
-    protected function getOptions()
+    protected function getHTTPClientOptions(): array
     {
         return array_merge([
-            'json' => $this->getVATPostOptions(),
-        ], parent::getOptions());
+            'json' => $this->getVATPostBody(),
+        ], parent::getHTTPClientOptions());
     }
 
     /**
@@ -60,6 +60,6 @@ abstract class VATPostRequest extends VATRequest
         }
     }
 
-    abstract protected function getVATPostOptions();
-    abstract protected function getRequiredClassAttributes();
+    abstract protected function getVATPostBody(): array;
+    abstract protected function getRequiredClassAttributes(): array;
 }

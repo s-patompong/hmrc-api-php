@@ -6,11 +6,11 @@ namespace HMRC\VAT;
 
 abstract class VATGetRequest extends VATRequest
 {
-    protected function getURI()
+    protected function getURI(): string
     {
         $uri = parent::getURI();
 
-        $queryStringArray = $this->getQueryStringArray();
+        $queryStringArray = $this->getQueryString();
 
         if(count($queryStringArray) == 0) {
             return $uri;
@@ -21,7 +21,7 @@ abstract class VATGetRequest extends VATRequest
         return "{$uri}?{$queryString}";
     }
 
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return parent::METHOD_GET;
     }
@@ -29,5 +29,5 @@ abstract class VATGetRequest extends VATRequest
     /**
      * @return array
      */
-    abstract protected function getQueryStringArray();
+    abstract protected function getQueryString(): array;
 }

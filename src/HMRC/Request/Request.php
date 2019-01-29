@@ -70,7 +70,7 @@ abstract class Request
      */
     public function fire()
     {
-        return $this->client->request($this->getMethod(), $this->getURI(), $this->getOptions());
+        return $this->client->request($this->getMethod(), $this->getURI(), $this->getHTTPClientOptions());
     }
 
     /**
@@ -78,31 +78,31 @@ abstract class Request
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getHTTPClientOptions(): array
     {
         return [
             'headers' => $this->getHeaders(),
         ];
     }
 
-    protected function getAcceptHeader()
+    protected function getAcceptHeader(): string
     {
         return "application/vnd.hmrc.{$this->serviceVersion}+{$this->contentType}";
     }
 
-    protected function getAuthorizationHeader(string $token)
+    protected function getAuthorizationHeader(string $token): string
     {
         return "Bearer {$token}";
     }
 
-    protected function getHeaders()
+    protected function getHeaders(): array
     {
         return [
             static::HEADER_ACCEPT => $this->getAcceptHeader(),
         ];
     }
 
-    protected function getURI()
+    protected function getURI(): string
     {
         return "{$this->apiBaseUrl}{$this->getApiPath()}";
     }
@@ -167,6 +167,6 @@ abstract class Request
         return $this;
     }
 
-    abstract protected function getMethod();
-    abstract protected function getApiPath();
+    abstract protected function getMethod(): string;
+    abstract protected function getApiPath(): string;
 }
