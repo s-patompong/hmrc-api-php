@@ -28,6 +28,8 @@ $submitVatReturnTotalValuePurchasesExVAT = 300;
 $submitVatReturnTotalValueGoodsSuppliedExVAT = 3000;
 $submitVatReturnTotalAcquisitionsExVAT = 3000;
 
+$viewVatReturnPeriodKey = "18A2";
+
 ?>
 
 <!doctype html>
@@ -217,6 +219,20 @@ $submitVatReturnTotalAcquisitionsExVAT = 3000;
                         </a>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <p>View VAT Return</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="view_vat_return_period_key" value="<?php echo $viewVatReturnPeriodKey; ?>"
+                                   placeholder="Period Key">
+                        </div>
+                    </td>
+                    <td class="test-btn">
+                        <a href="javascript:void(0)" onclick="viewVATReturn()">
+                            <button class="btn btn-sm btn-primary">Test</button>
+                        </a>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -334,6 +350,21 @@ $submitVatReturnTotalAcquisitionsExVAT = 3000;
             location.href = "/examples/vat/submit-vat-return.php" + '?' + queryString;
         } else {
             location.href = "/examples/vat/submit-vat-return.php";
+        }
+    }
+
+    function viewVATReturn() {
+        const vrn = $("input[name='vrn']").val();
+        const periodKey = $("input[name='view_vat_return_period_key']").val();
+
+        let query = [];
+        if (vrn !== "") query.push(`vrn=${vrn}`);
+        if (periodKey !== "") query.push(`period_key=${periodKey}`);
+        const queryString = query.join('&');
+        if (query.length) {
+            location.href = "/examples/vat/view-vat-return.php" + '?' + queryString;
+        } else {
+            location.href = "/examples/vat/view-vat-return.php";
         }
     }
 </script>
