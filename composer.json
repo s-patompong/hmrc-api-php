@@ -25,5 +25,8 @@
         "psr-4": {
             "HMRC\\Test\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit --bootstrap vendor/autoload.php tests"
     }
 }
