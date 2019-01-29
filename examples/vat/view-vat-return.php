@@ -13,5 +13,8 @@ if(
 }
 
 $request = new \HMRC\VAT\ViewVATReturnRequest($_GET['vrn'], $_GET['period_key']);
+if(isset($_GET['gov_test_scenario'])) {
+    $request->setGovTestScenario($_GET['gov_test_scenario']);
+}
 $response = $request->fire();
 $response->echoBodyWithJsonHeader();

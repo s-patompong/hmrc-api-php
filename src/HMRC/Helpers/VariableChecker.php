@@ -20,6 +20,15 @@ class VariableChecker
             return;
         }
 
-        throw new InvalidVariableValueException("Variable doesn't have value allowed in possible value " . implode(",", $possibleValues));
+        $possibleValuesWithoutNull = array_filter($possibleValues, function($value) {
+            return !is_null($value);
+        });
+
+        $connectWord = 'values are';
+        if(count($possibleValuesWithoutNull) == 1) {
+            $connectWord = 'value is';
+        }
+
+        throw new InvalidVariableValueException("Invalid variable value, the allowed {$connectWord} " . implode(",", $possibleValuesWithoutNull));
     }
 }

@@ -192,6 +192,10 @@ $accessToken = AccessToken::get();
                                 <option value="1" selected>Yes</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="submit_vat_return_gov_test_scenario"
+                                   placeholder="Government Test Scenario">
+                        </div>
                     </td>
                     <td class="test-btn">
                         <a href="javascript:void(0)" onclick="submitVATReturn()">
@@ -205,6 +209,10 @@ $accessToken = AccessToken::get();
                         <div class="form-group">
                             <input type="text" class="form-control" name="view_vat_return_period_key" value="<?php echo $viewVatReturnPeriodKey; ?>"
                                    placeholder="Period Key">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="view_vat_return_gov_test_scenario"
+                                   placeholder="Government Test Scenario">
                         </div>
                     </td>
                     <td class="test-btn">
@@ -311,6 +319,7 @@ $accessToken = AccessToken::get();
         const totalValueGoodsSuppliedEXVat = $("input[name='submit_vat_return_total_value_goods_supplied_ex_vat']").val();
         const totalAcquisitionsEXVat = $("input[name='submit_vat_return_total_acquisitions_ex_vat']").val();
         const finalised = $("select[name='submit_vat_return_finalised']").val();
+        const govTestScenario = $("select[name='submit_vat_return_gov_test_scenario']").val();
 
         let query = [];
         if (vrn !== "") query.push(`vrn=${vrn}`);
@@ -325,6 +334,7 @@ $accessToken = AccessToken::get();
         if (totalValueGoodsSuppliedEXVat !== "") query.push(`total_value_goods_supplied_ex_vat=${totalValueGoodsSuppliedEXVat}`);
         if (totalAcquisitionsEXVat !== "") query.push(`total_acquisitions_ex_vat=${totalAcquisitionsEXVat}`);
         if (finalised !== "") query.push(`finalised=${finalised}`);
+        if (govTestScenario !== "") query.push(`gov_test_scenario=${govTestScenario}`);
         const queryString = query.join('&');
         if (query.length) {
             location.href = "/examples/vat/submit-vat-return.php" + '?' + queryString;
@@ -336,10 +346,12 @@ $accessToken = AccessToken::get();
     function viewVATReturn() {
         const vrn = $("input[name='vrn']").val();
         const periodKey = $("input[name='view_vat_return_period_key']").val();
+        const govTestScenario = $("input[name='view_vat_return_gov_test_scenario']").val();
 
         let query = [];
         if (vrn !== "") query.push(`vrn=${vrn}`);
         if (periodKey !== "") query.push(`period_key=${periodKey}`);
+        if (govTestScenario !== "") query.push(`gov_test_scenario=${govTestScenario}`);
         const queryString = query.join('&');
         if (query.length) {
             location.href = "/examples/vat/view-vat-return.php" + '?' + queryString;
