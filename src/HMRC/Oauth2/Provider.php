@@ -6,16 +6,9 @@ namespace HMRC\Oauth2;
 
 use HMRC\Environment\Environment;
 use League\OAuth2\Client\Provider\GenericProvider;
-use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class Provider extends GenericProvider
 {
-    /** @var string live environment */
-    const ENV_LIVE = 'LIVE';
-
-    /** @var string sandbox environment */
-    const ENV_SANDBOX = 'SANDBOX';
-
     /**
      * Provider constructor.
      *
@@ -57,21 +50,5 @@ class Provider extends GenericProvider
 
         header('Location: ' . $authorizationUrl);
         exit;
-    }
-
-    /**
-     * @return \League\OAuth2\Client\Token\AccessTokenInterface
-     * @throws \HMRC\Exceptions\InvalidVariableTypeException
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
-     */
-    public function refreshToken(): AccessTokenInterface
-    {
-        $newAccessToken = $this->getAccessToken('refresh_token', [
-            'refresh_token' => AccessToken::get()->getRefreshToken(),
-        ]);
-
-        AccessToken::set($newAccessToken);
-
-        return AccessToken::get();
     }
 }

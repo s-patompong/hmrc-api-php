@@ -6,7 +6,6 @@ namespace HMRC\Test\Helpers;
 
 use HMRC\Exceptions\InvalidDateFormatException;
 use HMRC\Helpers\DateChecker;
-use HMRC\VAT\SubmitVATReturnRequest;
 use PHPUnit\Framework\TestCase;
 
 class DateCheckerTest extends TestCase
