@@ -6,6 +6,7 @@ namespace HMRC\Request;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use HMRC\Environment\Environment;
 use HMRC\Response\Response as HMRCResponse;
 
 abstract class Request
@@ -37,9 +38,6 @@ abstract class Request
     /** @var Client Guzzle client */
     protected $client;
 
-    /** @var string API base URL */
-    protected $apiBaseUrl;
-
     /** @var string Service version of HMRC API */
     protected $serviceVersion = '1.0';
 
@@ -49,21 +47,6 @@ abstract class Request
     public function __construct()
     {
         $this->client = new Client;
-        $this->apiBaseUrl = static::URL_SANDBOX;
-    }
-
-    public function useLiveEnv()
-    {
-        $this->apiBaseUrl = static::URL_LIVE;
-
-        return $this;
-    }
-
-    public function useSandboxEnv()
-    {
-        $this->apiBaseUrl = static::URL_SANDBOX;
-
-        return $this;
     }
 
     /**
@@ -109,27 +92,16 @@ abstract class Request
 
     protected function getURI(): string
     {
-        return "{$this->apiBaseUrl}{$this->getApiPath()}";
+        return "{$this->getApiBaseUrl()}{$this->getApiPath()}";
     }
 
-    /**
-     * @return string
-     */
-    public function getApiBaseUrl(): string
+    protected function getApiBaseUrl(): string
     {
-        return $this->apiBaseUrl;
-    }
+        if(Environment::getInstance()->isSandbox()) {
+            return self::URL_SANDBOX;
+        }
 
-    /**
-     * @param string $apiBaseUrl
-     *
-     * @return Request
-     */
-    public function setApiBaseUrl(string $apiBaseUrl): Request
-    {
-        $this->apiBaseUrl = $apiBaseUrl;
-
-        return $this;
+        return self::URL_LIVE;
     }
 
     /**
