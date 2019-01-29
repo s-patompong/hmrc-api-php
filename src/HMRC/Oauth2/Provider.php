@@ -4,7 +4,7 @@
 namespace HMRC\Oauth2;
 
 
-use HMRC\Exceptions\InvalidEnvironmentException;
+use HMRC\Environment\Environment;
 use League\OAuth2\Client\Provider\GenericProvider;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
@@ -19,21 +19,12 @@ class Provider extends GenericProvider
     /**
      * Provider constructor.
      *
-     * @param string $environment
      * @param string $clientID
      * @param string $clientSecret
      * @param string $callbackURI
-     * @param string $callerURL
-     * @param array $collaborators
-     *
-     * @throws InvalidEnvironmentException
      */
-    public function __construct(string $environment, string $clientID, string $clientSecret, string $callbackURI, string $callerURL, array $collaborators = [])
+    public function __construct(string $clientID, string $clientSecret, string $callbackURI)
     {
-        if (!in_array($environment, [ static::ENV_LIVE, static::ENV_SANDBOX ])) {
-            throw new InvalidEnvironmentException("Invalid environment, accept only " . static::ENV_LIVE . " and " . static::ENV_SANDBOX . ".");
-        }
-
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -42,20 +33,14 @@ class Provider extends GenericProvider
             'clientId' => $clientID,
             'clientSecret' => $clientSecret,
             'redirectUri' => $callbackURI,
-        ], $this->optionFromEnvironments($environment));
+        ], $this->optionFromEnvironments());
 
-        $_SESSION[ 'environment' ] = $environment;
-        $_SESSION[ 'client_id' ] = $clientID;
-        $_SESSION[ 'client_secret' ] = $clientSecret;
-        $_SESSION[ 'redirect_uri' ] = $callbackURI;
-        $_SESSION[ 'caller' ] = $callerURL;
-
-        parent::__construct($options, $collaborators);
+        parent::__construct($options);
     }
 
-    private function optionFromEnvironments(string $environment): array
+    private function optionFromEnvironments(): array
     {
-        $subDomain = $environment == static::ENV_LIVE ? 'api' : 'test-api';
+        $subDomain = Environment::getInstance()->isLive() ? 'api' : 'test-api';
 
         return [
             'urlAuthorize' => "https://{$subDomain}.service.hmrc.gov.uk/oauth/authorize",
@@ -75,61 +60,18 @@ class Provider extends GenericProvider
     }
 
     /**
-     * @return Provider
-     * @throws InvalidEnvironmentException
-     */
-    public static function newFromSession(): Provider
-    {
-        return new static(
-            $_SESSION[ 'environment' ],
-            $_SESSION[ 'client_id' ],
-            $_SESSION[ 'client_secret' ],
-            $_SESSION[ 'redirect_uri' ],
-            $_SESSION[ 'caller' ]
-        );
-    }
-
-    public function redirectToCaller()
-    {
-        header('Location: ' . $_SESSION[ 'caller' ]);
-        exit;
-    }
-
-    /**
      * @return \League\OAuth2\Client\Token\AccessTokenInterface
+     * @throws \HMRC\Exceptions\InvalidVariableTypeException
      * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
      */
     public function refreshToken(): AccessTokenInterface
     {
-        return $this->getAccessToken('refresh_token', [
+        $newAccessToken = $this->getAccessToken('refresh_token', [
             'refresh_token' => AccessToken::get()->getRefreshToken(),
         ]);
-    }
 
-    /**
-     * @throws InvalidEnvironmentException
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
-     */
-    public static function saveAccessTokenAndRedirectBackToCaller()
-    {
-        // Get provider from session
-        $provider = static::newFromSession();
+        AccessToken::set($newAccessToken);
 
-        // Get access token from response URL and save it in access token session
-        AccessToken::set(serialize($provider->getAccessTokenFromResponse()));
-
-        // Redirect back to caller
-        $provider->redirectToCaller();
-    }
-
-    /**
-     * @return \League\OAuth2\Client\Token\AccessTokenInterface
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
-     */
-    public function getAccessTokenFromResponse(): AccessTokenInterface
-    {
-        return $this->getAccessToken('authorization_code', [
-            'code' => $_GET[ 'code' ],
-        ]);
+        return AccessToken::get();
     }
 }

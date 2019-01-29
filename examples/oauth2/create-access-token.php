@@ -14,13 +14,17 @@ if (!isset($_GET[ 'client_id' ]) || !isset($_GET[ 'client_secret' ])) {
 session_start();
 
 $baseURL = baseURL();
+$callbackUri = "{$baseURL}/examples/oauth2/callback.php" ;
+
+$_SESSION[ 'client_id' ] = $_GET[ 'client_id' ];
+$_SESSION[ 'client_secret' ] = $_GET[ 'client_secret' ];
+$_SESSION[ 'callback_uri' ] = $callbackUri;
+$_SESSION[ 'caller' ] = "/examples/index.php";
 
 $provider = new Provider(
-    Provider::ENV_SANDBOX,
     $_GET[ 'client_id' ],
     $_GET[ 'client_secret' ],
-    "{$baseURL}/examples/oauth2/callback.php",
-    "/examples/index.php"
+    $callbackUri
 );
 $scope = [ Scope::VAT_READ, Scope::HELLO, Scope::VAT_WRITE ];
 $provider->redirectToAuthorizationURL($scope);

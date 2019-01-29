@@ -5,13 +5,16 @@ namespace HMRC\Oauth2;
 
 
 use HMRC\Exceptions\HMRCException;
+use HMRC\Exceptions\InvalidVariableTypeException;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class AccessToken
 {
+    const SESSION_KEY = 'hmrc_access_token';
+
     public static function exists(): bool
     {
-        return isset($_SESSION[ 'access_token' ]);
+        return isset($_SESSION[ self::SESSION_KEY ]);
     }
 
     /**
@@ -19,12 +22,25 @@ class AccessToken
      */
     public static function get()
     {
-        return isset($_SESSION[ 'access_token' ]) ? unserialize($_SESSION[ 'access_token' ]) : null;
+        return isset($_SESSION[ self::SESSION_KEY ]) ? unserialize($_SESSION[ self::SESSION_KEY ]) : null;
     }
 
-    public static function set(string $serializedAccessToken)
+    /**
+     * @param $accessToken
+     *
+     * @throws InvalidVariableTypeException
+     */
+    public static function set($accessToken)
     {
-        $_SESSION[ 'access_token' ] = $serializedAccessToken;
+        if($accessToken instanceof AccessTokenInterface) {
+            $accessToken = serialize($accessToken);
+        }
+
+        if(gettype($accessToken) !== 'string') {
+            throw new InvalidVariableTypeException("Access token must be string or implement AccessTokenInterface.");
+        }
+
+        $_SESSION[ self::SESSION_KEY ] = $accessToken;
     }
 
     /**
@@ -36,7 +52,7 @@ class AccessToken
         /** @var \League\OAuth2\Client\Token\AccessToken $accessToken */
         $accessToken = self::get();
 
-        if(is_null($accessToken)) {
+        if (is_null($accessToken)) {
             throw new HMRCException("Access token doesn't exists.");
         }
 
