@@ -4,9 +4,9 @@
 namespace HMRC\VAT;
 
 
-use ReflectionClass;
+use HMRC\GovernmentTestScenario\GovernmentTestScenario;
 
-class RetrieveVATObligationsGovTestScenario
+class RetrieveVATObligationsGovTestScenario extends GovernmentTestScenario
 {
     /**
      * Simulates the scenario where the client has quarterly obligations and one is fulfilled
@@ -62,15 +62,4 @@ class RetrieveVATObligationsGovTestScenario
      * Simulates the scenario where no data is found
      */
     const NOT_FOUND = 'NOT_FOUND';
-
-    /**
-     * @return array
-     * @throws \ReflectionException
-     */
-    public static function getValidGovTestScenarios()
-    {
-        $oClass = new ReflectionClass(__CLASS__);
-
-        return array_values($oClass->getConstants());
-    }
 }

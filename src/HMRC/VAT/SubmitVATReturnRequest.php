@@ -4,6 +4,8 @@
 namespace HMRC\VAT;
 
 
+use HMRC\GovernmentTestScenario\GovernmentTestScenario;
+
 class SubmitVATReturnRequest extends VATPostRequest
 {
     /** @var string */
@@ -301,5 +303,15 @@ class SubmitVATReturnRequest extends VATPostRequest
         $this->finalised = $finalised;
 
         return $this;
+    }
+
+    /**
+     * Get class that deal with government test scenario
+     *
+     * @return GovernmentTestScenario
+     */
+    protected function getGovTestScenarioClass(): GovernmentTestScenario
+    {
+        return new SubmitVATReturnGovTestScenario;
     }
 }

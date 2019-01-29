@@ -56,7 +56,7 @@ abstract class VATPostRequest extends VATRequest
         if(count($missingFields) > 0) {
             $missingFieldsString = implode(", " , $missingFields);
 
-            throw new MissingFieldsException("Missing fields {$missingFieldsString}, please set using class SET method.");
+            throw new MissingFieldsException("Missing fields {$missingFieldsString}, please set using class setter method.");
         }
     }
 

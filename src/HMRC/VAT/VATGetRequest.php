@@ -10,7 +10,13 @@ abstract class VATGetRequest extends VATRequest
     {
         $uri = parent::getURI();
 
-        $queryString = http_build_query($this->getQueryStringArray());
+        $queryStringArray = $this->getQueryStringArray();
+
+        if(count($queryStringArray) == 0) {
+            return $uri;
+        }
+
+        $queryString = http_build_query($queryStringArray);
 
         return "{$uri}?{$queryString}";
     }
@@ -21,7 +27,7 @@ abstract class VATGetRequest extends VATRequest
     }
 
     /**
-     * @return string
+     * @return array
      */
     abstract protected function getQueryStringArray();
 }
