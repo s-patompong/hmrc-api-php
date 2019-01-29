@@ -35,8 +35,5 @@ $request->setTotalValuePurchasesExVAT($_GET['total_value_purchases_ex_vat']);
 $request->setTotalValueGoodsSuppliedExVAT($_GET['total_value_goods_supplied_ex_vat']);
 $request->setTotalAcquisitionsExVAT($_GET['total_acquisitions_ex_vat']);
 $request->setFinalised($finalised);
-
-refreshAccessTokenIfNeeded();
-
 $response = $request->fire();
 $response->echoBodyWithJsonHeader();

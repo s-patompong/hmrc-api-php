@@ -1,10 +1,13 @@
 <?php
 
 require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/helpers.php";
 
 use HMRC\Oauth2\AccessToken;
 
 session_start();
+
+refreshAccessTokenIfNeeded();
 
 $accessToken = AccessToken::get();
 

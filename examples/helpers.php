@@ -20,7 +20,6 @@ function refreshAccessTokenIfNeeded()
     $existingAccessToken = AccessToken::get();
 
     if ($existingAccessToken->hasExpired()) {
-    // if (true) {
         $newAccessToken = $provider->getAccessToken('refresh_token', [
             'refresh_token' => $existingAccessToken->getRefreshToken()
         ]);

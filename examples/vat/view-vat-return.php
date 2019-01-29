@@ -13,8 +13,5 @@ if(
 }
 
 $request = new \HMRC\VAT\ViewVATReturnRequest($_GET['vrn'], $_GET['period_key']);
-
-refreshAccessTokenIfNeeded();
-
 $response = $request->fire();
 $response->echoBodyWithJsonHeader();

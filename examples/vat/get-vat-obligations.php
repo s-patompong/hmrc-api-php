@@ -17,8 +17,5 @@ $request = new \HMRC\VAT\RetrieveVATObligationsRequest($_GET['vrn'], $_GET['from
 if(!is_null($govTestScenario)) {
     $request->setGovTestScenario($govTestScenario);
 }
-
-refreshAccessTokenIfNeeded();
-
 $response = $request->fire();
 $response->echoBodyWithJsonHeader();
