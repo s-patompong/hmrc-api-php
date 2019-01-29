@@ -4,9 +4,9 @@
 namespace HMRC\Hello;
 
 
-use HMRC\Request\RequestWithAccessToken;
+use HMRC\Request\RequestWithServerToken;
 
-class UserHelloWorldRequest extends RequestWithAccessToken
+class HelloApplicationRequest extends RequestWithServerToken
 {
     protected function getMethod(): string
     {
@@ -15,6 +15,6 @@ class UserHelloWorldRequest extends RequestWithAccessToken
 
     protected function getApiPath(): string
     {
-        return '/hello/user';
+        return '/hello/application';
     }
 }

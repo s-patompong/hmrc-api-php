@@ -11,6 +11,10 @@ function baseURL()
 
 function refreshAccessTokenIfNeeded()
 {
+    if(!isset($_SESSION[ 'client_id' ])) {
+        return;
+    }
+
     $provider = new Provider(
         $_SESSION[ 'client_id' ],
         $_SESSION[ 'client_secret' ],

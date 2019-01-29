@@ -13,8 +13,7 @@ if (!isset($_GET[ 'client_id' ]) || !isset($_GET[ 'client_secret' ])) {
 
 session_start();
 
-$baseURL = baseURL();
-$callbackUri = "{$baseURL}/examples/oauth2/callback.php" ;
+$callbackUri = "http://localhost:8080/examples/oauth2/callback.php" ;
 
 $_SESSION[ 'client_id' ] = $_GET[ 'client_id' ];
 $_SESSION[ 'client_secret' ] = $_GET[ 'client_secret' ];
