@@ -10,4 +10,4 @@ session_start();
 
 $request = new \HMRC\Hello\ApplicationHelloWorldRequest($_GET['server_token']);
 $response = $request->fire();
-echo $response->getBody();
+$response->echoBodyWithJsonHeader();

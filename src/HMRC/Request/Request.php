@@ -5,6 +5,8 @@ namespace HMRC\Request;
 
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
+use HMRC\Response\Response as HMRCResponse;
 
 abstract class Request
 {
@@ -65,12 +67,15 @@ abstract class Request
     }
 
     /**
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return HMRCResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function fire()
     {
-        return $this->client->request($this->getMethod(), $this->getURI(), $this->getHTTPClientOptions());
+        /** @var Response $response */
+        $response = $this->client->request($this->getMethod(), $this->getURI(), $this->getHTTPClientOptions());
+
+        return new HMRCResponse($response);
     }
 
     /**

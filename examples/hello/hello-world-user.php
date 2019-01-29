@@ -9,5 +9,5 @@ require_once __DIR__ . "/../helpers.php";
 
 $request = new UserHelloWorldRequest();
 $response = $request->fire();
-echo $response->getBody();
+$response->echoBodyWithJsonHeader();
 
