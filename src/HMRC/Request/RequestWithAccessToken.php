@@ -29,22 +29,7 @@ abstract class RequestWithAccessToken extends Request
      */
     public function fire()
     {
-        if ($this->accessToken->hasExpired()) {
-            $this->refreshAccessToken();
-        }
-
         return parent::fire();
-    }
-
-    /**
-     * @throws Exceptions\InvalidEnvironmentException
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
-     */
-    private function refreshAccessToken()
-    {
-        $provider = Provider::newFromSession();
-        $newToken = $provider->refreshToken();
-        AccessToken::set($newToken);
     }
 
     protected function getHeaders(): array

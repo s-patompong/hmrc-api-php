@@ -8,6 +8,9 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 require_once __DIR__ . "/../helpers.php";
 
 $request = new UserHelloWorldRequest();
+
+refreshAccessTokenIfNeeded();
+
 $response = $request->fire();
 $response->echoBodyWithJsonHeader();
 

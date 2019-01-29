@@ -5,5 +5,5 @@ require_once __DIR__ . "/../helpers.php";
 session_start();
 session_destroy();
 
-header('Location: ' . baseURL() . "/examples/index.php");
+header("Location: /examples/index.php");
 exit;
