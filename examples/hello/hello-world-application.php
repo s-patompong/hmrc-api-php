@@ -8,6 +8,8 @@ if(!isset($_GET['server_token'])) {
 
 session_start();
 
-$request = new \HMRC\Hello\HelloApplicationRequest($_GET['server_token']);
+\HMRC\ServerToken\ServerToken::getInstance()->set($_GET['server_token']);
+
+$request = new \HMRC\Hello\HelloApplicationRequest();
 $response = $request->fire();
 $response->echoBodyWithJsonHeader();

@@ -4,23 +4,38 @@
 namespace HMRC\Request;
 
 
+use HMRC\Exceptions\EmptyServerTokenException;
+use HMRC\ServerToken\ServerToken;
+
 abstract class RequestWithServerToken extends Request
 {
-    /** @var string */
-    protected $serverToken;
-
-    public function __construct(string $serverToken)
+    /**
+     * @return \HMRC\Response\Response
+     * @throws EmptyServerTokenException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function fire()
     {
-        parent::__construct();
+        $this->checkServerToken();
 
-        $this->serverToken = $serverToken;
+        return parent::fire();
     }
 
     protected function getHeaders(): array
     {
         return [
             parent::HEADER_ACCEPT => $this->getAcceptHeader(),
-            parent::HEADER_AUTHORIZATION => $this->getAuthorizationHeader($this->serverToken),
+            parent::HEADER_AUTHORIZATION => $this->getAuthorizationHeader(ServerToken::getInstance()->get()),
         ];
+    }
+
+    /**
+     * @throws EmptyServerTokenException
+     */
+    private function checkServerToken()
+    {
+        if(is_null(ServerToken::getInstance()->get())) {
+            throw new EmptyServerTokenException("Server token is empty, please set using ServerToken::getInstance()->set() method.");
+        }
     }
 }
