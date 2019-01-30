@@ -13,9 +13,12 @@ $response = $request->fire();
 return $response->getBody();
 ```
 
-For application-restricted API call such as Hello Application, you can use HelloApplicationRequest class. You also need to pass server token to its constructor.
+For application-restricted API call such as Hello Application. First set the server token using ServerToken class and then you can use HelloApplicationRequest class to call the API.
 
 ```
+// ServerToken is singleton so please use getInstance() method to get an instance and then use set method on it
+\HMRC\ServerToken\ServerToken::getInstance()->set($_GET['server_token']);
+
 $request = new \HMRC\Hello\HelloApplicationRequest($serverToken);
 $response = $request->fire();
 
