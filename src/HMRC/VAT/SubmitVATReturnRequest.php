@@ -106,14 +106,6 @@ class SubmitVATReturnRequest extends VATPostRequest
     }
 
     /**
-     * @return float
-     */
-    public function getVatDueSales(): float
-    {
-        return $this->vatDueSales;
-    }
-
-    /**
      * @param float $vatDueSales
      *
      * @return SubmitVATReturnRequest
@@ -123,14 +115,6 @@ class SubmitVATReturnRequest extends VATPostRequest
         $this->vatDueSales = $vatDueSales;
 
         return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getVatDueAcquisitions(): float
-    {
-        return $this->vatDueAcquisitions;
     }
 
     /**
@@ -146,14 +130,6 @@ class SubmitVATReturnRequest extends VATPostRequest
     }
 
     /**
-     * @return float
-     */
-    public function getTotalVatDue(): float
-    {
-        return $this->totalVatDue;
-    }
-
-    /**
      * @param float $totalVatDue
      *
      * @return SubmitVATReturnRequest
@@ -163,14 +139,6 @@ class SubmitVATReturnRequest extends VATPostRequest
         $this->totalVatDue = $totalVatDue;
 
         return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getVatReclaimedCurrPeriod(): float
-    {
-        return $this->vatReclaimedCurrPeriod;
     }
 
     /**
@@ -186,14 +154,6 @@ class SubmitVATReturnRequest extends VATPostRequest
     }
 
     /**
-     * @return float
-     */
-    public function getNetVatDue(): float
-    {
-        return $this->netVatDue;
-    }
-
-    /**
      * @param float $netVatDue
      *
      * @return SubmitVATReturnRequest
@@ -203,14 +163,6 @@ class SubmitVATReturnRequest extends VATPostRequest
         $this->netVatDue = $netVatDue;
 
         return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getTotalValueSalesExVAT(): float
-    {
-        return $this->totalValueSalesExVAT;
     }
 
     /**
@@ -226,14 +178,6 @@ class SubmitVATReturnRequest extends VATPostRequest
     }
 
     /**
-     * @return float
-     */
-    public function getTotalValuePurchasesExVAT(): float
-    {
-        return $this->totalValuePurchasesExVAT;
-    }
-
-    /**
      * @param float $totalValuePurchasesExVAT
      *
      * @return SubmitVATReturnRequest
@@ -243,14 +187,6 @@ class SubmitVATReturnRequest extends VATPostRequest
         $this->totalValuePurchasesExVAT = $totalValuePurchasesExVAT;
 
         return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getTotalValueGoodsSuppliedExVAT(): float
-    {
-        return $this->totalValueGoodsSuppliedExVAT;
     }
 
     /**
@@ -266,14 +202,6 @@ class SubmitVATReturnRequest extends VATPostRequest
     }
 
     /**
-     * @return float
-     */
-    public function getTotalAcquisitionsExVAT(): float
-    {
-        return $this->totalAcquisitionsExVAT;
-    }
-
-    /**
      * @param float $totalAcquisitionsExVAT
      *
      * @return SubmitVATReturnRequest
@@ -283,14 +211,6 @@ class SubmitVATReturnRequest extends VATPostRequest
         $this->totalAcquisitionsExVAT = $totalAcquisitionsExVAT;
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isFinalised(): bool
-    {
-        return $this->finalised;
     }
 
     /**

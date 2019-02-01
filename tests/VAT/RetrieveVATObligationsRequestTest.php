@@ -69,7 +69,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
      */
     public function testItThrowErrorWhenGiveWrongStatus()
     {
-        $request = new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, 'A');
+        new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, 'A');
     }
 
     /**
@@ -78,8 +78,8 @@ class RetrieveVATObligationsRequestTest extends RequestTest
      */
     public function testItDoesNotThrowErrorWhenGiveCorrectStatus()
     {
-        $statusO = new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::OPEN);
-        $statusF = new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::FULFILLED);
+        new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::OPEN);
+        new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::FULFILLED);
 
         $this->addToAssertionCount(1);
     }
