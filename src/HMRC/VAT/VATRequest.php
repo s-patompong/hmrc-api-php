@@ -6,6 +6,8 @@ namespace HMRC\VAT;
 
 use HMRC\GovernmentTestScenario\GovernmentTestScenario;
 use HMRC\HTTP\Header;
+use HMRC\Request\RequestHeader;
+use HMRC\Request\RequestHeaderValue;
 use HMRC\Request\RequestWithAccessToken;
 
 abstract class VATRequest extends RequestWithAccessToken
@@ -31,7 +33,7 @@ abstract class VATRequest extends RequestWithAccessToken
     protected function getHeaders(): array
     {
         $ownHeaders = [
-            parent::HEADER_CONTENT_TYPE => parent::HEADER_VALUE_APPLICATION_JSON,
+            RequestHeader::CONTENT_TYPE => RequestHeaderValue::APPLICATION_JSON,
         ];
 
         if(!is_null($this->govTestScenario)) {

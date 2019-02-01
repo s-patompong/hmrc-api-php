@@ -11,7 +11,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
-use HMRC\Request\Request as HMRCRequest;
+use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
 use HMRC\VAT\ViewVATReturnGovTestScenario;
 use HMRC\VAT\ViewVATReturnRequest;
@@ -73,7 +73,7 @@ class ViewVATReturnRequestTest extends RequestTest
             new Response(200),
         ]));
         $stack->push(Middleware::history($container));
-        $mockedClient = new Client(['handler' => $stack]);
+        $mockedClient = new Client([ 'handler' => $stack ]);
 
         // Call the API
         (new ViewVATReturnRequest($this->vrn, $this->periodKey))
@@ -84,7 +84,7 @@ class ViewVATReturnRequestTest extends RequestTest
         $this->assertCount(1, $container);
 
         /** @var Request $guzzleRequest */
-        $guzzleRequest = $container[0]['request'];
+        $guzzleRequest = $container[ 0 ][ 'request' ];
         $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $accessToken);
         $this->assertAcceptHeader($guzzleRequest);
@@ -98,6 +98,6 @@ class ViewVATReturnRequestTest extends RequestTest
 
     protected function getCorrectMethod()
     {
-        return HMRCRequest::METHOD_GET;
+        return RequestMethod::GET;
     }
 }

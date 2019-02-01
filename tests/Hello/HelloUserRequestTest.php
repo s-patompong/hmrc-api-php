@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloUserRequest;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
-use HMRC\Request\Request as HMRCRequest;
+use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
 use League\OAuth2\Client\Token\AccessToken;
 
@@ -73,7 +73,7 @@ class HelloUserRequestTest extends RequestTest
 
     protected function getCorrectMethod()
     {
-        return HMRCRequest::METHOD_GET;
+        return RequestMethod::GET;
     }
 
 }

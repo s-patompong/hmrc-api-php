@@ -11,30 +11,6 @@ use HMRC\Response\Response as HMRCResponse;
 
 abstract class Request
 {
-    /** @var string URL of sandbox environment */
-    const URL_SANDBOX = 'https://test-api.service.hmrc.gov.uk';
-
-    /** @var string URL of live environment */
-    const URL_LIVE = 'https://api.service.hmrc.gov.uk';
-
-    /** @var string constant for method GET */
-    const METHOD_GET = 'GET';
-
-    /** @var string constant for method POST */
-    const METHOD_POST = 'POST';
-
-    /** @var string accept header for request */
-    const HEADER_ACCEPT = 'Accept';
-
-    /** @var string authorization header for request */
-    const HEADER_AUTHORIZATION = 'Authorization';
-
-    /** @var string content type for request */
-    const HEADER_CONTENT_TYPE = 'Content-Type';
-
-    /** @var string header value application/json */
-    const HEADER_VALUE_APPLICATION_JSON = 'application/json';
-
     /** @var Client Guzzle client */
     protected $client;
 
@@ -86,7 +62,7 @@ abstract class Request
     protected function getHeaders(): array
     {
         return [
-            static::HEADER_ACCEPT => $this->getAcceptHeader(),
+            RequestHeader::ACCEPT => $this->getAcceptHeader(),
         ];
     }
 
@@ -98,10 +74,10 @@ abstract class Request
     protected function getApiBaseUrl(): string
     {
         if(Environment::getInstance()->isSandbox()) {
-            return self::URL_SANDBOX;
+            return RequestURL::SANDBOX;
         }
 
-        return self::URL_LIVE;
+        return RequestURL::LIVE;
     }
 
     /**

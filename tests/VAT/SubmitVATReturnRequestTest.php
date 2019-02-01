@@ -11,7 +11,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
-use HMRC\Request\Request as HMRCRequest;
+use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
 use HMRC\VAT\SubmitVATReturnGovTestScenario;
 use HMRC\VAT\SubmitVATReturnRequest;
@@ -146,6 +146,6 @@ class SubmitVATReturnRequestTest extends RequestTest
 
     protected function getCorrectMethod()
     {
-        return HMRCRequest::METHOD_POST;
+        return RequestMethod::POST;
     }
 }

@@ -11,7 +11,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloApplicationRequest;
-use HMRC\Request\Request as HMRCRequest;
+use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
 
 class HelloApplicationRequestTest extends RequestTest
@@ -68,7 +68,7 @@ class HelloApplicationRequestTest extends RequestTest
 
     protected function getCorrectMethod()
     {
-        return HMRCRequest::METHOD_GET;
+        return RequestMethod::GET;
     }
 
 }

@@ -5,6 +5,7 @@ namespace HMRC\VAT;
 
 
 use HMRC\Exceptions\MissingFieldsException;
+use HMRC\Request\RequestMethod;
 
 abstract class VATPostRequest extends VATRequest
 {
@@ -15,7 +16,7 @@ abstract class VATPostRequest extends VATRequest
 
     protected function getMethod(): string
     {
-        return parent::METHOD_POST;
+        return RequestMethod::POST;
     }
 
     /**

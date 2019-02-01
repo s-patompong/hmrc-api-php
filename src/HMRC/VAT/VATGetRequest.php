@@ -4,6 +4,8 @@
 namespace HMRC\VAT;
 
 
+use HMRC\Request\RequestMethod;
+
 abstract class VATGetRequest extends VATRequest
 {
     protected function getURI(): string
@@ -23,7 +25,7 @@ abstract class VATGetRequest extends VATRequest
 
     protected function getMethod(): string
     {
-        return parent::METHOD_GET;
+        return RequestMethod::GET;
     }
 
     /**
