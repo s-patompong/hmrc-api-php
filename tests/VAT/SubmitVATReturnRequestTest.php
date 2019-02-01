@@ -4,8 +4,6 @@
 namespace HMRC\Test\VAT;
 
 
-use HMRC\Request\Request as HMRCRequest;
-use HMRC\Test\Request\RequestTest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -13,10 +11,10 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
+use HMRC\Request\Request as HMRCRequest;
+use HMRC\Test\Request\RequestTest;
 use HMRC\VAT\SubmitVATReturnGovTestScenario;
 use HMRC\VAT\SubmitVATReturnRequest;
-use HMRC\VAT\ViewVATReturnGovTestScenario;
-use HMRC\VAT\ViewVATReturnRequest;
 use League\OAuth2\Client\Token\AccessToken;
 
 class SubmitVATReturnRequestTest extends RequestTest
