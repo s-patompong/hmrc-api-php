@@ -32,11 +32,11 @@ class AccessToken
      */
     public static function set($accessToken)
     {
-        if($accessToken instanceof AccessTokenInterface) {
+        if ($accessToken instanceof AccessTokenInterface) {
             $accessToken = serialize($accessToken);
         }
 
-        if(gettype($accessToken) !== 'string') {
+        if (gettype($accessToken) !== 'string') {
             throw new InvalidVariableTypeException("Access token must be string or implement AccessTokenInterface.");
         }
 
