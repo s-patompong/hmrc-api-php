@@ -319,7 +319,7 @@ $accessToken = AccessToken::get();
         const totalValueGoodsSuppliedEXVat = $("input[name='submit_vat_return_total_value_goods_supplied_ex_vat']").val();
         const totalAcquisitionsEXVat = $("input[name='submit_vat_return_total_acquisitions_ex_vat']").val();
         const finalised = $("select[name='submit_vat_return_finalised']").val();
-        const govTestScenario = $("select[name='submit_vat_return_gov_test_scenario']").val();
+        const govTestScenario = $("input[name='submit_vat_return_gov_test_scenario']").val();
 
         let query = [];
         if (vrn !== "") query.push(`vrn=${vrn}`);

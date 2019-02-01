@@ -14,6 +14,7 @@ use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
 use HMRC\VAT\SubmitVATReturnGovTestScenario;
+use HMRC\VAT\SubmitVATReturnPostBody;
 use HMRC\VAT\SubmitVATReturnRequest;
 use League\OAuth2\Client\Token\AccessToken;
 
@@ -36,7 +37,7 @@ class SubmitVATReturnRequestTest extends RequestTest
      */
     public function testItThrowErrorWhenGiveWrongGovTestScenario()
     {
-        $request = new SubmitVATReturnRequest($this->vrn);
+        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
         $request->setGovTestScenario('WRONG');
     }
 
@@ -46,28 +47,28 @@ class SubmitVATReturnRequestTest extends RequestTest
      */
     public function testItDoesNotThrowErrorWhenGiveCorrectGovTestScenario()
     {
-        $request = new SubmitVATReturnRequest($this->vrn);
+        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
         $request->setGovTestScenario(SubmitVATReturnGovTestScenario::INVALID_PERIODKEY);
 
         $this->addToAssertionCount(1);
     }
 
     /**
-     * @expectedException \HMRC\Exceptions\MissingFieldsException
+     * @expectedException \HMRC\Exceptions\InvalidPostBodyException
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \HMRC\Exceptions\InvalidPostBodyException
      * @throws \HMRC\Exceptions\MissingAccessTokenException
-     * @throws \HMRC\Exceptions\MissingFieldsException
      */
     public function testItThrowExceptionWhenMissingFields()
     {
-        $request = new SubmitVATReturnRequest($this->vrn);
+        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
         $request->fire();
     }
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidVariableTypeException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function testItCallsCorrectEndpoint()
     {
@@ -98,9 +99,8 @@ class SubmitVATReturnRequestTest extends RequestTest
         $totalAcquisitionsExVAT = 108;
         $finalised = true;
 
-        // Call the API
-        (new SubmitVATReturnRequest($this->vrn))
-            ->setPeriodKey($periodKey)
+        $postBody = new SubmitVATReturnPostBody;
+        $postBody->setPeriodKey($periodKey)
             ->setVatDueSales($vatDueSales)
             ->setVatDueAcquisitions($vatDueAcquisitions)
             ->setTotalVatDue($totalVatDue)
@@ -110,7 +110,10 @@ class SubmitVATReturnRequestTest extends RequestTest
             ->setTotalValuePurchasesExVAT($totalValuePurchasesExVAT)
             ->setTotalValueGoodsSuppliedExVAT($totalValueGoodsSuppliedExVAT)
             ->setTotalAcquisitionsExVAT($totalAcquisitionsExVAT)
-            ->setFinalised($finalised)
+            ->setFinalised($finalised);
+
+        // Call the API
+        (new SubmitVATReturnRequest($this->vrn, $postBody))
             ->setClient($mockedClient)
             ->fire();
 

@@ -23,18 +23,20 @@ if(
 
 $finalised = $_GET['finalised'] == '1' ? true : false;
 
-$request = new \HMRC\VAT\SubmitVATReturnRequest($_GET['vrn']);
-$request->setPeriodKey($_GET['period_key']);
-$request->setVatDueSales($_GET['vat_due_sale']);
-$request->setVatDueAcquisitions($_GET['vat_due_acquisitions']);
-$request->setTotalVatDue($_GET['total_vat_due']);
-$request->setVatReclaimedCurrPeriod($_GET['vat_reclaimed_curr_period']);
-$request->setNetVatDue($_GET['net_vat_due']);
-$request->setTotalValueSalesExVAT($_GET['total_value_sales_ex_vat']);
-$request->setTotalValuePurchasesExVAT($_GET['total_value_purchases_ex_vat']);
-$request->setTotalValueGoodsSuppliedExVAT($_GET['total_value_goods_supplied_ex_vat']);
-$request->setTotalAcquisitionsExVAT($_GET['total_acquisitions_ex_vat']);
-$request->setFinalised($finalised);
+$postBody = new \HMRC\VAT\SubmitVATReturnPostBody;
+$postBody->setPeriodKey($_GET['period_key']);
+$postBody->setVatDueSales($_GET['vat_due_sale']);
+$postBody->setVatDueAcquisitions($_GET['vat_due_acquisitions']);
+$postBody->setTotalVatDue($_GET['total_vat_due']);
+$postBody->setVatReclaimedCurrPeriod($_GET['vat_reclaimed_curr_period']);
+$postBody->setNetVatDue($_GET['net_vat_due']);
+$postBody->setTotalValueSalesExVAT($_GET['total_value_sales_ex_vat']);
+$postBody->setTotalValuePurchasesExVAT($_GET['total_value_purchases_ex_vat']);
+$postBody->setTotalValueGoodsSuppliedExVAT($_GET['total_value_goods_supplied_ex_vat']);
+$postBody->setTotalAcquisitionsExVAT($_GET['total_acquisitions_ex_vat']);
+$postBody->setFinalised($finalised);
+
+$request = new \HMRC\VAT\SubmitVATReturnRequest($_GET['vrn'], $postBody);
 if(isset($_GET['gov_test_scenario'])) {
     $request->setGovTestScenario($_GET['gov_test_scenario']);
 }
