@@ -144,6 +144,18 @@ abstract class Request
         return $this;
     }
 
+    /**
+     * @param Client $client
+     *
+     * @return Request
+     */
+    public function setClient(Client $client): Request
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
     abstract protected function getMethod(): string;
     abstract protected function getApiPath(): string;
 }

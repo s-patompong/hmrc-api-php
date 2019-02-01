@@ -19,7 +19,7 @@ class EnvironmentTest extends TestCase
 
     public function testUsesSandboxModeByDefault()
     {
-        $this->assertEquals($this->environment->isSandbox(), true);
+        $this->assertEquals(true, $this->environment->isSandbox());
     }
 
     /**
@@ -42,13 +42,13 @@ class EnvironmentTest extends TestCase
 
     public function testItCanBeReset()
     {
-        $this->assertEquals(Environment::getInstance()->isSandbox(), true);
+        $this->assertEquals(true, Environment::getInstance()->isSandbox());
 
         Environment::getInstance()->setToLive();
-        $this->assertEquals(Environment::getInstance()->isLive(), true);
+        $this->assertEquals(true, Environment::getInstance()->isLive());
 
         Environment::reset();
-        $this->assertEquals(Environment::getInstance()->isSandbox(), true);
+        $this->assertEquals(true, Environment::getInstance()->isSandbox());
     }
 
     protected function tearDown()

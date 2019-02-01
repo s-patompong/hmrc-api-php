@@ -21,11 +21,11 @@ class GovernmentTestScenarioTest extends TestCase
      */
     public function testItGetCorrectAllowedScenarios()
     {
-        $this->assertEquals($this->stub->getValidGovTestScenarios(), [
+        $this->assertEquals([
             StubGovTestScenario::DEFAULT,
             StubGovTestScenario::SIMPLE_CASE,
             StubGovTestScenario::COMPLEX_CASE,
-        ]);
+        ], $this->stub->getValidGovTestScenarios());
     }
 
     /**
