@@ -55,8 +55,9 @@ class HelloApplicationRequestTest extends RequestTest
 
         /** @var Request $guzzleRequest */
         $guzzleRequest = $container[0]['request'];
-        $this->assertUri($guzzleRequest->getUri());
+        $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $serverToken);
+        $this->assertAcceptHeader($guzzleRequest);
     }
 
     protected function getCorrectPath()

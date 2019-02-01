@@ -10,7 +10,6 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HMRC\Exceptions\MissingAccessTokenException;
 use HMRC\Hello\HelloUserRequest;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Test\Request\RequestTest;
@@ -60,12 +59,14 @@ class HelloUserRequestTest extends RequestTest
 
         /** @var Request $guzzleRequest */
         $guzzleRequest = $container[0]['request'];
-        $this->assertUri($guzzleRequest->getUri());
+        $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $accessToken);
+        $this->assertAcceptHeader($guzzleRequest);
     }
 
     protected function getCorrectPath()
     {
         return '/hello/user';
     }
+
 }

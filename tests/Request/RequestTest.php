@@ -13,6 +13,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
 use HMRC\ServerToken\ServerToken;
 use HMRC\Test\Hello\HelloApplicationRequestTest;
+use HMRC\Test\Hello\HelloUserRequestTest;
 use PHPUnit\Framework\TestCase;
 
 abstract class RequestTest extends TestCase
@@ -49,8 +50,9 @@ abstract class RequestTest extends TestCase
         ServerToken::getInstance()->set($serverToken);
     }
 
-    protected function assertUri(Uri $uri)
+    protected function assertUri(Request $request)
     {
+        $uri = $request->getUri();
         $this->assertHttps($uri->getScheme());
         $this->assertSandboxHost($uri->getHost());
         $this->assertPath($this->getCorrectPath(), $uri->getPath());
@@ -80,6 +82,13 @@ abstract class RequestTest extends TestCase
         $authorizationHeader = $guzzleRequest->getHeader('Authorization');
         $this->assertCount(1, $authorizationHeader);
         $this->assertEquals("Bearer $token", $authorizationHeader[ 0 ]);
+    }
+
+    protected function assertAcceptHeader(Request $guzzleRequest)
+    {
+        $acceptHeader = $guzzleRequest->getHeader('Accept');
+        $this->assertCount(1, $acceptHeader);
+        $this->assertEquals('application/vnd.hmrc.1.0+json', $acceptHeader[ 0 ]);
     }
 
     abstract protected function getCorrectPath();

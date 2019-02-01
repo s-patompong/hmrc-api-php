@@ -1,7 +1,7 @@
 <?php
 
 
-namespace HMRC\Test\Hello;
+namespace HMRC\Test\Request;
 
 
 use GuzzleHttp\Client;
@@ -11,17 +11,14 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloWorldRequest;
-use HMRC\Test\Request\RequestTest;
 use PHPUnit\Framework\TestCase;
 
-class HelloWorldRequestTest extends RequestTest
+class RequestPublicMethodTest extends TestCase
 {
     /**
-     * Test that it can call correct endpoint with correct options
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function testItCallsCorrectEndpoint()
+    public function testItCreateCorrectAcceptWhenSetVersionAndContentType()
     {
         // Setup mocked client
         $container = [];
@@ -34,6 +31,8 @@ class HelloWorldRequestTest extends RequestTest
         // Call the API
         (new HelloWorldRequest)
             ->setClient($mockedClient)
+            ->setServiceVersion("2.0")
+            ->setContentType("xml")
             ->fire();
 
         // Asserts
@@ -41,12 +40,8 @@ class HelloWorldRequestTest extends RequestTest
 
         /** @var Request $guzzleRequest */
         $guzzleRequest = $container[0]['request'];
-        $this->assertUri($guzzleRequest);
-        $this->assertAcceptHeader($guzzleRequest);
-    }
-
-    protected function getCorrectPath()
-    {
-        return '/hello/world';
+        $acceptHeader = $guzzleRequest->getHeader('Accept');
+        $this->assertCount(1, $acceptHeader);
+        $this->assertEquals('application/vnd.hmrc.2.0+xml', $acceptHeader[0]);
     }
 }
