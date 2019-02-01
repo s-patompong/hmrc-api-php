@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloUserRequest;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
+use HMRC\Request\Request as HMRCRequest;
 use HMRC\Test\Request\RequestTest;
 use League\OAuth2\Client\Token\AccessToken;
 
@@ -62,11 +63,17 @@ class HelloUserRequestTest extends RequestTest
         $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $accessToken);
         $this->assertAcceptHeader($guzzleRequest);
+        $this->assertMethod($guzzleRequest);
     }
 
     protected function getCorrectPath()
     {
         return '/hello/user';
+    }
+
+    protected function getCorrectMethod()
+    {
+        return HMRCRequest::METHOD_GET;
     }
 
 }

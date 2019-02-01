@@ -11,6 +11,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloWorldRequest;
+use HMRC\Request\Request as HMRCRequest;
 use HMRC\Test\Request\RequestTest;
 
 class HelloWorldRequestTest extends RequestTest
@@ -42,10 +43,16 @@ class HelloWorldRequestTest extends RequestTest
         $guzzleRequest = $container[0]['request'];
         $this->assertUri($guzzleRequest);
         $this->assertAcceptHeader($guzzleRequest);
+        $this->assertMethod($guzzleRequest);
     }
 
     protected function getCorrectPath()
     {
         return '/hello/world';
+    }
+
+    protected function getCorrectMethod()
+    {
+        return HMRCRequest::METHOD_GET;
     }
 }

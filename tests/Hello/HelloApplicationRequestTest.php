@@ -11,6 +11,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloApplicationRequest;
+use HMRC\Request\Request as HMRCRequest;
 use HMRC\Test\Request\RequestTest;
 
 class HelloApplicationRequestTest extends RequestTest
@@ -57,11 +58,17 @@ class HelloApplicationRequestTest extends RequestTest
         $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $serverToken);
         $this->assertAcceptHeader($guzzleRequest);
+        $this->assertMethod($guzzleRequest);
     }
 
     protected function getCorrectPath()
     {
         return '/hello/application';
+    }
+
+    protected function getCorrectMethod()
+    {
+        return HMRCRequest::METHOD_GET;
     }
 
 }

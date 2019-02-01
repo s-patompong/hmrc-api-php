@@ -10,7 +10,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HMRC\Oauth2\AccessToken;
+use HMRC\Request\Request as HMRCRequest;
 use HMRC\ServerToken\ServerToken;
 use PHPUnit\Framework\TestCase;
 
@@ -77,17 +77,23 @@ abstract class RequestTest extends TestCase
      */
     protected function assertAuthorizationHeader(Request $guzzleRequest, string $token)
     {
-        $authorizationHeader = $guzzleRequest->getHeader('Authorization');
+        $authorizationHeader = $guzzleRequest->getHeader(HMRCRequest::HEADER_AUTHORIZATION);
         $this->assertCount(1, $authorizationHeader);
         $this->assertEquals("Bearer $token", $authorizationHeader[ 0 ]);
     }
 
     protected function assertAcceptHeader(Request $guzzleRequest)
     {
-        $acceptHeader = $guzzleRequest->getHeader('Accept');
+        $acceptHeader = $guzzleRequest->getHeader(HMRCRequest::HEADER_ACCEPT);
         $this->assertCount(1, $acceptHeader);
         $this->assertEquals('application/vnd.hmrc.1.0+json', $acceptHeader[ 0 ]);
     }
 
+    protected function assertMethod(Request $guzzleRequest)
+    {
+        $this->assertEquals($this->getCorrectMethod(), $guzzleRequest->getMethod());
+    }
+
     abstract protected function getCorrectPath();
+    abstract protected function getCorrectMethod();
 }

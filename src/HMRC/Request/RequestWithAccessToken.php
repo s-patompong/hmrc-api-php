@@ -39,9 +39,8 @@ abstract class RequestWithAccessToken extends Request
 
     protected function getHeaders(): array
     {
-        return [
-            parent::HEADER_ACCEPT => $this->getAcceptHeader(),
+        return array_merge([
             parent::HEADER_AUTHORIZATION => $this->getAuthorizationHeader($this->accessToken),
-        ];
+        ], parent::getHeaders());
     }
 }
