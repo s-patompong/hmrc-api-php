@@ -71,8 +71,6 @@ abstract class RequestTest extends TestCase
         $this->assertEquals($correctPath, $path);
     }
 
-    abstract protected function getCorrectPath();
-
     /**
      * @param Request $guzzleRequest
      * @param string $token
@@ -83,4 +81,6 @@ abstract class RequestTest extends TestCase
         $this->assertCount(1, $authorizationHeader);
         $this->assertEquals("Bearer $token", $authorizationHeader[ 0 ]);
     }
+
+    abstract protected function getCorrectPath();
 }
