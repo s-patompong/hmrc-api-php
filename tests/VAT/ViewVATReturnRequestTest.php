@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Test\Request\RequestTest;
+use HMRC\VAT\ViewVATReturnGovTestScenario;
 use HMRC\VAT\ViewVATReturnRequest;
 use League\OAuth2\Client\Token\AccessToken;
 
@@ -32,15 +33,23 @@ class ViewVATReturnRequestTest extends RequestTest
     /**
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \HMRC\Exceptions\MissingAccessTokenException
      * @throws \ReflectionException
      */
     public function testItThrowErrorWhenGiveWrongGovTestScenario()
     {
         $request = new ViewVATReturnRequest($this->vrn, $this->periodKey);
-        $request->setGovTestScenario('WRONG')->fire();
+        $request->setGovTestScenario('WRONG');
+    }
+
+    /**
+     * @throws \HMRC\Exceptions\InvalidVariableValueException
+     * @throws \ReflectionException
+     */
+    public function testItDoesNotThrowErrorWhenGiveCorrectGovTestScenario()
+    {
+        $request = new ViewVATReturnRequest($this->vrn, $this->periodKey);
+        $request->setGovTestScenario(ViewVATReturnGovTestScenario::DATE_RANGE_TOO_LARGE);
     }
 
     /**
