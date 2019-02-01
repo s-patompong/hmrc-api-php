@@ -11,7 +11,7 @@ use HMRC\Helpers\VariableChecker;
 class RetrieveVATObligationsRequest extends VATGetRequest
 {
     /** @var array possible statuses, O is open and F is fulfilled */
-    const POSSIBLE_STATUSES = [ 'O', 'F' ];
+    const POSSIBLE_STATUSES = [ RetrieveVATObligationStatus::OPEN, RetrieveVATObligationStatus::FULFILLED ];
 
     /** @var string from */
     protected $from;
