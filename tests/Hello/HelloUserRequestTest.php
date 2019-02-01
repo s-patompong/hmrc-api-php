@@ -18,7 +18,7 @@ use League\OAuth2\Client\Token\AccessToken;
 class HelloUserRequestTest extends RequestTest
 {
     /**
-     * @expectedException HMRC\Exceptions\MissingAccessTokenException
+     * @expectedException \HMRC\Exceptions\MissingAccessTokenException
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\MissingAccessTokenException

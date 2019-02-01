@@ -22,8 +22,7 @@ abstract class VATPostRequest extends VATRequest
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws MissingFieldsException
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \HMRC\Exceptions\InvalidEnvironmentException
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     * @throws \HMRC\Exceptions\MissingAccessTokenException
      */
     public function fire()
     {

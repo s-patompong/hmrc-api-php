@@ -16,7 +16,7 @@ use HMRC\Test\Request\RequestTest;
 class HelloApplicationRequestTest extends RequestTest
 {
     /**
-     * @expectedException HMRC\Exceptions\EmptyServerTokenException
+     * @expectedException \HMRC\Exceptions\EmptyServerTokenException
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\EmptyServerTokenException
@@ -29,7 +29,6 @@ class HelloApplicationRequestTest extends RequestTest
 
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \HMRC\Exceptions\EmptyServerTokenException
      */
     public function testItShouldCallsCorrectEndpoint()
     {

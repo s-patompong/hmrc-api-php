@@ -10,10 +10,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\Uri;
 use HMRC\ServerToken\ServerToken;
-use HMRC\Test\Hello\HelloApplicationRequestTest;
-use HMRC\Test\Hello\HelloUserRequestTest;
 use PHPUnit\Framework\TestCase;
 
 abstract class RequestTest extends TestCase

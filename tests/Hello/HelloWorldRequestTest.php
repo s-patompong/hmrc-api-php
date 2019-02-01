@@ -12,7 +12,6 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HMRC\Hello\HelloWorldRequest;
 use HMRC\Test\Request\RequestTest;
-use PHPUnit\Framework\TestCase;
 
 class HelloWorldRequestTest extends RequestTest
 {
