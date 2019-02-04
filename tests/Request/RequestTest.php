@@ -25,7 +25,6 @@ abstract class RequestTest extends TestCase
     /**
      * Get client with mocked response
      * Reference: http://docs.guzzlephp.org/en/stable/testing.html
-     *
      */
     protected function createMockClient()
     {

@@ -17,11 +17,13 @@ use HMRC\Test\Request\RequestTest;
 class HelloWorldRequestTest extends RequestTest
 {
     /**
+     * @test
+     *
      * Test that it can call correct endpoint with correct options
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function testItCallsCorrectEndpoint()
+    public function it_calls_correct_endpoint()
     {
         // Setup mocked client
         $container = [];

@@ -19,22 +19,26 @@ use League\OAuth2\Client\Token\AccessToken;
 class HelloUserRequestTest extends RequestTest
 {
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\MissingAccessTokenException
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\MissingAccessTokenException
      */
-    public function testItShouldThrowExceptionIfNoAccessToken()
+    public function it_throws_exception_when_has_no_access_token()
     {
         $request = new HelloUserRequest;
         $request->fire();
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableTypeException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function testItShouldCallsCorrectEndpoint()
+    public function it_calls_correct_endpoint()
     {
         // Setup access token
         $accessToken = uniqid();

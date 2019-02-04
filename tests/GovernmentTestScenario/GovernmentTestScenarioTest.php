@@ -17,9 +17,11 @@ class GovernmentTestScenarioTest extends TestCase
     }
 
     /**
+     * @test
+     *
      * @throws \ReflectionException
      */
-    public function testItGetCorrectAllowedScenarios()
+    public function it_gets_correct_valid_government_test_scenarios()
     {
         $this->assertEquals([
             StubGovTestScenario::DEFAULT,
@@ -29,20 +31,24 @@ class GovernmentTestScenarioTest extends TestCase
     }
 
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */
-    public function testItThrowExceptionWithWrongScenario()
+    public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $this->stub->checkValid('wrong');
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */
-    public function testItDoesNotThrowExceptionWithWrongScenario()
+    public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $this->stub->checkValid(StubGovTestScenario::SIMPLE_CASE);
 

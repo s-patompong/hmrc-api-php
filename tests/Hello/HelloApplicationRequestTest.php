@@ -17,21 +17,25 @@ use HMRC\Test\Request\RequestTest;
 class HelloApplicationRequestTest extends RequestTest
 {
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\EmptyServerTokenException
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\EmptyServerTokenException
      */
-    public function testItShouldThrowExceptionWhenServerTokenIsEmpty()
+    public function it_throws_exception_when_server_token_is_empty()
     {
         $request = new HelloApplicationRequest;
         $request->fire();
     }
 
     /**
+     * @test
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function testItShouldCallsCorrectEndpoint()
+    public function it_calls_correct_endpoint()
     {
         // Setup server token
         $serverToken = uniqid();

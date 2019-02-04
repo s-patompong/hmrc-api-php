@@ -36,24 +36,28 @@ class RetrieveVATObligationsRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      * @throws \HMRC\Exceptions\InvalidDateFormatException
      */
-    public function testItThrowErrorWhenGiveWrongGovTestScenario()
+    public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $request = new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to);
         $request->setGovTestScenario('WRONG');
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      * @throws \HMRC\Exceptions\InvalidDateFormatException
      */
-    public function testItDoesNotThrowErrorWhenGiveCorrectGovTestScenario()
+    public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to);
         $request->setGovTestScenario(RetrieveVATObligationsGovTestScenario::MONTHLY_THREE_MET);
@@ -62,21 +66,25 @@ class RetrieveVATObligationsRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \HMRC\Exceptions\InvalidDateFormatException
      */
-    public function testItThrowErrorWhenGiveWrongStatus()
+    public function it_throws_exception_when_given_wrong_status()
     {
         new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, 'A');
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \HMRC\Exceptions\InvalidDateFormatException
      */
-    public function testItDoesNotThrowErrorWhenGiveCorrectStatus()
+    public function it_doesnt_throws_exception_when_given_correct_status()
     {
         new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::OPEN);
         new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::FULFILLED);
@@ -85,12 +93,14 @@ class RetrieveVATObligationsRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidDateFormatException
      * @throws \HMRC\Exceptions\InvalidVariableTypeException
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      */
-    public function testItCallsCorrectEndpoint()
+    public function it_calls_correct_endpoint()
     {
         // Setup access token
         $accessToken = uniqid();

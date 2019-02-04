@@ -30,22 +30,26 @@ class SubmitVATReturnRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */
-    public function testItThrowErrorWhenGiveWrongGovTestScenario()
+    public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
         $request->setGovTestScenario('WRONG');
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */
-    public function testItDoesNotThrowErrorWhenGiveCorrectGovTestScenario()
+    public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
         $request->setGovTestScenario(SubmitVATReturnGovTestScenario::INVALID_PERIODKEY);
@@ -54,23 +58,27 @@ class SubmitVATReturnRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\InvalidPostBodyException
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidPostBodyException
      * @throws \HMRC\Exceptions\MissingAccessTokenException
      */
-    public function testItThrowExceptionWhenMissingFields()
+    public function it_throws_exception_when_has_no_post_body()
     {
         $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
         $request->fire();
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableTypeException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function testItCallsCorrectEndpoint()
+    public function it_calls_correct_endpoint()
     {
         // Setup access token
         $accessToken = uniqid();

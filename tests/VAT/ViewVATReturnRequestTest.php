@@ -32,22 +32,26 @@ class ViewVATReturnRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */
-    public function testItThrowErrorWhenGiveWrongGovTestScenario()
+    public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $request = new ViewVATReturnRequest($this->vrn, $this->periodKey);
         $request->setGovTestScenario('WRONG');
     }
 
     /**
+     * @test
+     *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */
-    public function testItDoesNotThrowErrorWhenGiveCorrectGovTestScenario()
+    public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new ViewVATReturnRequest($this->vrn, $this->periodKey);
         $request->setGovTestScenario(ViewVATReturnGovTestScenario::DATE_RANGE_TOO_LARGE);
@@ -56,10 +60,12 @@ class ViewVATReturnRequestTest extends RequestTest
     }
 
     /**
+     * @test
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidVariableTypeException
      */
-    public function testItCallsCorrectEndpoint()
+    public function it_calls_correct_endpoint()
     {
         // Setup access token
         $accessToken = uniqid();

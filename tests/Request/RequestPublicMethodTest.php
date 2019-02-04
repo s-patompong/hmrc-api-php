@@ -16,9 +16,11 @@ use PHPUnit\Framework\TestCase;
 class RequestPublicMethodTest extends TestCase
 {
     /**
+     * @test
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function testItCreateCorrectAcceptWhenSetVersionAndContentType()
+    public function it_has_correct_accept_header_when_ser_version_and_content_type()
     {
         // Setup mocked client
         $container = [];
