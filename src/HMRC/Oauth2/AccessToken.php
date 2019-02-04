@@ -42,8 +42,9 @@ class AccessToken
     }
 
     /**
-     * @return bool
      * @throws MissingAccessTokenException
+     *
+     * @return bool
      */
     public static function hasExpired(): bool
     {
