@@ -31,7 +31,7 @@ abstract class RequestWithAccessToken extends Request
     public function fire()
     {
         if (is_null($this->accessToken)) {
-            throw new MissingAccessTokenException();
+            throw new MissingAccessTokenException("No access token, please set one using AccessToken class.");
         }
 
         return parent::fire();

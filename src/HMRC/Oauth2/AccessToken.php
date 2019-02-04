@@ -2,8 +2,8 @@
 
 namespace HMRC\Oauth2;
 
-use HMRC\Exceptions\HMRCException;
 use HMRC\Exceptions\InvalidVariableTypeException;
+use HMRC\Exceptions\MissingAccessTokenException;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class AccessToken
@@ -42,9 +42,8 @@ class AccessToken
     }
 
     /**
-     * @throws HMRCException
-     *
      * @return bool
+     * @throws MissingAccessTokenException
      */
     public static function hasExpired(): bool
     {
@@ -52,7 +51,7 @@ class AccessToken
         $accessToken = self::get();
 
         if (is_null($accessToken)) {
-            throw new HMRCException("Access token doesn't exists.");
+            throw new MissingAccessTokenException("Access token doesn't exists.");
         }
 
         return $accessToken->hasExpired();
