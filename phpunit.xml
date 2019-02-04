@@ -17,6 +17,11 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix="Test.php">/tests/</directory>
+        </whitelist>
+    </filter>
     <php>
         <!--
         <env name="REDIS_HOST" value="127.0.0.1" />
