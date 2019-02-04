@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\Hello;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -34,7 +32,7 @@ class HelloWorldRequestTest extends RequestTest
         $mockedClient = new Client(['handler' => $stack]);
 
         // Call the API
-        (new HelloWorldRequest)
+        (new HelloWorldRequest())
             ->setClient($mockedClient)
             ->fire();
 

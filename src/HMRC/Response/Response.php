@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Response;
-
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use HMRC\HTTP\Code;
@@ -18,7 +16,7 @@ class Response
     }
 
     /**
-     * Check if the response is success
+     * Check if the response is success.
      *
      * @return bool
      */
@@ -28,7 +26,7 @@ class Response
     }
 
     /**
-     * Get the response body
+     * Get the response body.
      *
      * @return \Psr\Http\Message\StreamInterface
      */
@@ -38,7 +36,7 @@ class Response
     }
 
     /**
-     * Get response body as JSON
+     * Get response body as JSON.
      *
      * @param bool $assoc
      *
@@ -50,7 +48,7 @@ class Response
     }
 
     /**
-     * Get response body as associate array
+     * Get response body as associate array.
      *
      * @return mixed
      */
@@ -60,11 +58,11 @@ class Response
     }
 
     /**
-     * Echo out the response body with json header
+     * Echo out the response body with json header.
      */
     public function echoBodyWithJsonHeader()
     {
-        header("Content-Type: application/json");
+        header('Content-Type: application/json');
 
         echo $this->getBody();
     }

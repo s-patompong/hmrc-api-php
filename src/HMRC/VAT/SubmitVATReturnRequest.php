@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\GovernmentTestScenario\GovernmentTestScenario;
 
@@ -19,12 +17,12 @@ class SubmitVATReturnRequest extends VATPostRequest
     }
 
     /**
-     * Get class that deal with government test scenario
+     * Get class that deal with government test scenario.
      *
      * @return GovernmentTestScenario
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new SubmitVATReturnGovTestScenario;
+        return new SubmitVATReturnGovTestScenario();
     }
 }

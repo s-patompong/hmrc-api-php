@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\GovernmentTestScenario;
-
 
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +11,7 @@ class GovernmentTestScenarioTest extends TestCase
 
     protected function setUp()
     {
-        $this->stub = new StubGovTestScenario;
+        $this->stub = new StubGovTestScenario();
     }
 
     /**
@@ -34,6 +32,7 @@ class GovernmentTestScenarioTest extends TestCase
      * @test
      *
      * @expectedException \HMRC\Exceptions\InvalidVariableValueException
+     *
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
      */

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\ServerToken;
-
 
 class ServerToken
 {
@@ -16,17 +14,17 @@ class ServerToken
         $this->serverToken = null;
     }
 
-    public static function getInstance(): ServerToken
+    public static function getInstance(): self
     {
         if (self::$instance == null) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;
     }
 
     /**
-     * Get the server token
+     * Get the server token.
      *
      * @return string|null
      */
@@ -36,7 +34,7 @@ class ServerToken
     }
 
     /**
-     * Set the server token
+     * Set the server token.
      *
      * @param string $serverToken
      */

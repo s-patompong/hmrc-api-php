@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\Hello;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -28,7 +26,7 @@ class HelloUserRequestTest extends RequestTest
      */
     public function it_throws_exception_when_has_no_access_token()
     {
-        $request = new HelloUserRequest;
+        $request = new HelloUserRequest();
         $request->fire();
     }
 
@@ -55,7 +53,7 @@ class HelloUserRequestTest extends RequestTest
         $mockedClient = new Client(['handler' => $stack]);
 
         // Call the API
-        (new HelloUserRequest)
+        (new HelloUserRequest())
             ->setClient($mockedClient)
             ->fire();
 
@@ -79,5 +77,4 @@ class HelloUserRequestTest extends RequestTest
     {
         return RequestMethod::GET;
     }
-
 }

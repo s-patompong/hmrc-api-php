@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\Request;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -31,10 +29,10 @@ class RequestPublicMethodTest extends TestCase
         $mockedClient = new Client(['handler' => $stack]);
 
         // Call the API
-        (new HelloWorldRequest)
+        (new HelloWorldRequest())
             ->setClient($mockedClient)
-            ->setServiceVersion("2.0")
-            ->setContentType("xml")
+            ->setServiceVersion('2.0')
+            ->setContentType('xml')
             ->fire();
 
         // Asserts

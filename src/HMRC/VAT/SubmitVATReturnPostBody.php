@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\Exceptions\InvalidPostBodyException;
 use HMRC\Request\PostBody;
@@ -43,59 +41,59 @@ class SubmitVATReturnPostBody implements PostBody
     private $finalised;
 
     /**
-     * Validate the post body, it should throw an Exception if something is wrong
+     * Validate the post body, it should throw an Exception if something is wrong.
      *
      * @throws InvalidPostBodyException
      */
     public function validate()
     {
         $requiredFields = [
-            "periodKey",
-            "vatDueSales",
-            "vatDueAcquisitions",
-            "totalVatDue",
-            "vatReclaimedCurrPeriod",
-            "netVatDue",
-            "totalValueSalesExVAT",
-            "totalValuePurchasesExVAT",
-            "totalValueGoodsSuppliedExVAT",
-            "totalAcquisitionsExVAT",
-            "finalised",
+            'periodKey',
+            'vatDueSales',
+            'vatDueAcquisitions',
+            'totalVatDue',
+            'vatReclaimedCurrPeriod',
+            'netVatDue',
+            'totalValueSalesExVAT',
+            'totalValuePurchasesExVAT',
+            'totalValueGoodsSuppliedExVAT',
+            'totalAcquisitionsExVAT',
+            'finalised',
         ];
 
         $emptyFields = [];
         foreach ($requiredFields as $requiredField) {
-            if(is_null($this->{$requiredField})) {
+            if (is_null($this->{$requiredField})) {
                 $emptyFields[] = $requiredField;
             }
         }
 
-        if(count($emptyFields) > 0) {
-            $emptyFieldsString = implode(", ", $emptyFields);
+        if (count($emptyFields) > 0) {
+            $emptyFieldsString = implode(', ', $emptyFields);
 
             throw new InvalidPostBodyException("Missing post body fields ({$emptyFieldsString}).");
         }
     }
 
     /**
-     * Return post body as an array to be used to call
+     * Return post body as an array to be used to call.
      *
      * @return array
      */
     public function toArray(): array
     {
         return [
-            "periodKey" => $this->periodKey,
-            "vatDueSales" => $this->vatDueSales,
-            "vatDueAcquisitions" => $this->vatDueAcquisitions,
-            "totalVatDue" => $this->totalVatDue,
-            "vatReclaimedCurrPeriod" => $this->vatReclaimedCurrPeriod,
-            "netVatDue" => $this->netVatDue,
-            "totalValueSalesExVAT" => $this->totalValueSalesExVAT,
-            "totalValuePurchasesExVAT" => $this->totalValuePurchasesExVAT,
-            "totalValueGoodsSuppliedExVAT" => $this->totalValueGoodsSuppliedExVAT,
-            "totalAcquisitionsExVAT" => $this->totalAcquisitionsExVAT,
-            "finalised" => $this->finalised,
+            'periodKey'                    => $this->periodKey,
+            'vatDueSales'                  => $this->vatDueSales,
+            'vatDueAcquisitions'           => $this->vatDueAcquisitions,
+            'totalVatDue'                  => $this->totalVatDue,
+            'vatReclaimedCurrPeriod'       => $this->vatReclaimedCurrPeriod,
+            'netVatDue'                    => $this->netVatDue,
+            'totalValueSalesExVAT'         => $this->totalValueSalesExVAT,
+            'totalValuePurchasesExVAT'     => $this->totalValuePurchasesExVAT,
+            'totalValueGoodsSuppliedExVAT' => $this->totalValueGoodsSuppliedExVAT,
+            'totalAcquisitionsExVAT'       => $this->totalAcquisitionsExVAT,
+            'finalised'                    => $this->finalised,
         ];
     }
 
@@ -104,7 +102,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setPeriodKey(string $periodKey): SubmitVATReturnPostBody
+    public function setPeriodKey(string $periodKey): self
     {
         $this->periodKey = $periodKey;
 
@@ -116,7 +114,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setVatDueSales(float $vatDueSales): SubmitVATReturnPostBody
+    public function setVatDueSales(float $vatDueSales): self
     {
         $this->vatDueSales = $vatDueSales;
 
@@ -128,7 +126,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setVatDueAcquisitions(float $vatDueAcquisitions): SubmitVATReturnPostBody
+    public function setVatDueAcquisitions(float $vatDueAcquisitions): self
     {
         $this->vatDueAcquisitions = $vatDueAcquisitions;
 
@@ -140,7 +138,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setTotalVatDue(float $totalVatDue): SubmitVATReturnPostBody
+    public function setTotalVatDue(float $totalVatDue): self
     {
         $this->totalVatDue = $totalVatDue;
 
@@ -152,7 +150,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setVatReclaimedCurrPeriod(float $vatReclaimedCurrPeriod): SubmitVATReturnPostBody
+    public function setVatReclaimedCurrPeriod(float $vatReclaimedCurrPeriod): self
     {
         $this->vatReclaimedCurrPeriod = $vatReclaimedCurrPeriod;
 
@@ -164,7 +162,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setNetVatDue(float $netVatDue): SubmitVATReturnPostBody
+    public function setNetVatDue(float $netVatDue): self
     {
         $this->netVatDue = $netVatDue;
 
@@ -176,7 +174,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setTotalValueSalesExVAT(float $totalValueSalesExVAT): SubmitVATReturnPostBody
+    public function setTotalValueSalesExVAT(float $totalValueSalesExVAT): self
     {
         $this->totalValueSalesExVAT = $totalValueSalesExVAT;
 
@@ -188,7 +186,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setTotalValuePurchasesExVAT(float $totalValuePurchasesExVAT): SubmitVATReturnPostBody
+    public function setTotalValuePurchasesExVAT(float $totalValuePurchasesExVAT): self
     {
         $this->totalValuePurchasesExVAT = $totalValuePurchasesExVAT;
 
@@ -200,7 +198,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setTotalValueGoodsSuppliedExVAT(float $totalValueGoodsSuppliedExVAT): SubmitVATReturnPostBody
+    public function setTotalValueGoodsSuppliedExVAT(float $totalValueGoodsSuppliedExVAT): self
     {
         $this->totalValueGoodsSuppliedExVAT = $totalValueGoodsSuppliedExVAT;
 
@@ -212,7 +210,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setTotalAcquisitionsExVAT(float $totalAcquisitionsExVAT): SubmitVATReturnPostBody
+    public function setTotalAcquisitionsExVAT(float $totalAcquisitionsExVAT): self
     {
         $this->totalAcquisitionsExVAT = $totalAcquisitionsExVAT;
 
@@ -224,7 +222,7 @@ class SubmitVATReturnPostBody implements PostBody
      *
      * @return SubmitVATReturnPostBody
      */
-    public function setFinalised(bool $finalised): SubmitVATReturnPostBody
+    public function setFinalised(bool $finalised): self
     {
         $this->finalised = $finalised;
 

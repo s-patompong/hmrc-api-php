@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Oauth2;
-
 
 use HMRC\Exceptions\HMRCException;
 use HMRC\Exceptions\InvalidVariableTypeException;
@@ -14,7 +12,7 @@ class AccessToken
 
     public static function exists(): bool
     {
-        return isset($_SESSION[ self::SESSION_KEY ]);
+        return isset($_SESSION[self::SESSION_KEY]);
     }
 
     /**
@@ -22,7 +20,7 @@ class AccessToken
      */
     public static function get()
     {
-        return isset($_SESSION[ self::SESSION_KEY ]) ? unserialize($_SESSION[ self::SESSION_KEY ]) : null;
+        return isset($_SESSION[self::SESSION_KEY]) ? unserialize($_SESSION[self::SESSION_KEY]) : null;
     }
 
     /**
@@ -37,15 +35,16 @@ class AccessToken
         }
 
         if (gettype($accessToken) !== 'string') {
-            throw new InvalidVariableTypeException("Access token must be string or implement AccessTokenInterface.");
+            throw new InvalidVariableTypeException('Access token must be string or implement AccessTokenInterface.');
         }
 
-        $_SESSION[ self::SESSION_KEY ] = $accessToken;
+        $_SESSION[self::SESSION_KEY] = $accessToken;
     }
 
     /**
-     * @return bool
      * @throws HMRCException
+     *
+     * @return bool
      */
     public static function hasExpired(): bool
     {

@@ -1,9 +1,6 @@
 <?php
 
-
 namespace HMRC\Helpers;
-
-
 
 use HMRC\Exceptions\InvalidDateFormatException;
 
@@ -18,7 +15,7 @@ class DateChecker
     public static function checkDateStringFormat(string $dateString, string $format)
     {
         $date = \DateTime::createFromFormat($format, $dateString);
-        if($date && $date->format($format) == $dateString) {
+        if ($date && $date->format($format) == $dateString) {
             return;
         }
 

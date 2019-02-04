@@ -1,14 +1,12 @@
 <?php
 
-
 namespace HMRC\Environment;
-
 
 use HMRC\Exceptions\InvalidVariableValueException;
 
 class Environment
 {
-    const ALLOWED_ENV = [ self::SANDBOX, self::LIVE ];
+    const ALLOWED_ENV = [self::SANDBOX, self::LIVE];
 
     const SANDBOX = 'sandbox';
 
@@ -24,10 +22,10 @@ class Environment
         $this->env = self::SANDBOX;
     }
 
-    public static function getInstance(): Environment
+    public static function getInstance(): self
     {
         if (self::$instance == null) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -35,7 +33,7 @@ class Environment
 
     public static function reset()
     {
-        self::$instance = new self;
+        self::$instance = new self();
     }
 
     public function getEnv(): string
@@ -82,8 +80,9 @@ class Environment
      */
     private function checkEnv(string $env)
     {
-        if(!in_array($env, self::ALLOWED_ENV)) {
-            $allowedValueString = implode(", ", self::ALLOWED_ENV);
+        if (!in_array($env, self::ALLOWED_ENV)) {
+            $allowedValueString = implode(', ', self::ALLOWED_ENV);
+
             throw new InvalidVariableValueException("Invalid env, the allowed env are {$allowedValueString}.");
         }
     }

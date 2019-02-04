@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Oauth2;
-
 
 use HMRC\Environment\Environment;
 use League\OAuth2\Client\Provider\GenericProvider;
@@ -23,9 +21,9 @@ class Provider extends GenericProvider
         }
 
         $options = array_merge([
-            'clientId' => $clientID,
+            'clientId'     => $clientID,
             'clientSecret' => $clientSecret,
-            'redirectUri' => $callbackURI,
+            'redirectUri'  => $callbackURI,
         ], $this->optionFromEnvironments());
 
         parent::__construct($options);
@@ -36,8 +34,8 @@ class Provider extends GenericProvider
         $subDomain = Environment::getInstance()->isLive() ? 'api' : 'test-api';
 
         return [
-            'urlAuthorize' => "https://{$subDomain}.service.hmrc.gov.uk/oauth/authorize",
-            'urlAccessToken' => "https://{$subDomain}.service.hmrc.gov.uk/oauth/token",
+            'urlAuthorize'            => "https://{$subDomain}.service.hmrc.gov.uk/oauth/authorize",
+            'urlAccessToken'          => "https://{$subDomain}.service.hmrc.gov.uk/oauth/token",
             'urlResourceOwnerDetails' => "https://{$subDomain}.service.hmrc.gov.uk/oauth/resource",
         ];
     }
@@ -45,10 +43,10 @@ class Provider extends GenericProvider
     public function redirectToAuthorizationURL(array $scopes)
     {
         $authorizationUrl = $this->getAuthorizationUrl([
-            'scope' => implode(" ", $scopes),
+            'scope' => implode(' ', $scopes),
         ]);
 
-        header('Location: ' . $authorizationUrl);
+        header('Location: '.$authorizationUrl);
         exit;
     }
 }

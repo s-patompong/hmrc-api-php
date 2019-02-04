@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\GovernmentTestScenario;
-
 
 use HMRC\Helpers\VariableChecker;
 use ReflectionClass;
@@ -10,8 +8,9 @@ use ReflectionClass;
 abstract class GovernmentTestScenario
 {
     /**
-     * @return array
      * @throws \ReflectionException
+     *
+     * @return array
      */
     public function getValidGovTestScenarios(): array
     {

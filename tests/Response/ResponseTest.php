@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\Response;
-
 
 use PHPUnit\Framework\TestCase;
 
