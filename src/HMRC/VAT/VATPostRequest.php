@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\Request\PostBody;
 use HMRC\Request\RequestMethod;
@@ -25,10 +23,11 @@ abstract class VATPostRequest extends VATRequest
     }
 
     /**
-     * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidPostBodyException
      * @throws \HMRC\Exceptions\MissingAccessTokenException
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function fire()
     {

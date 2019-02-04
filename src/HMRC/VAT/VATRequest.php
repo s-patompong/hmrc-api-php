@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\GovernmentTestScenario\GovernmentTestScenario;
 use HMRC\HTTP\Header;
@@ -27,7 +25,7 @@ abstract class VATRequest extends RequestWithAccessToken
 
     protected function getApiPath(): string
     {
-        return "/organisations/vat/{$this->vrn}" . $this->getVatApiPath();
+        return "/organisations/vat/{$this->vrn}".$this->getVatApiPath();
     }
 
     protected function getHeaders(): array
@@ -36,7 +34,7 @@ abstract class VATRequest extends RequestWithAccessToken
             RequestHeader::CONTENT_TYPE => RequestHeaderValue::APPLICATION_JSON,
         ];
 
-        if(!is_null($this->govTestScenario)) {
+        if (!is_null($this->govTestScenario)) {
             $ownHeaders[Header::GOV_TEST_SCENARIO] = $this->govTestScenario;
         }
 
@@ -54,15 +52,16 @@ abstract class VATRequest extends RequestWithAccessToken
     /**
      * @param string $govTestScenario
      *
-     * @return VATRequest
      * @throws \HMRC\Exceptions\InvalidVariableValueException
      * @throws \ReflectionException
+     *
+     * @return VATRequest
      */
-    public function setGovTestScenario(string $govTestScenario): VATRequest
+    public function setGovTestScenario(string $govTestScenario): self
     {
         $this->govTestScenario = $govTestScenario;
 
-        if(!is_null($this->govTestScenario)) {
+        if (!is_null($this->govTestScenario)) {
             $this->getGovTestScenarioClass()->checkValid($this->govTestScenario);
         }
 
@@ -70,14 +69,14 @@ abstract class VATRequest extends RequestWithAccessToken
     }
 
     /**
-     * Get class that deal with government test scenario
+     * Get class that deal with government test scenario.
      *
      * @return GovernmentTestScenario
      */
     abstract protected function getGovTestScenarioClass(): GovernmentTestScenario;
 
     /**
-     * Get VAT Api path, the path should be after {$this->vrn}
+     * Get VAT Api path, the path should be after {$this->vrn}.
      *
      * @return string
      */

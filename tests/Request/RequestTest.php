@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\Request;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -16,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class RequestTest extends TestCase
 {
-    /** @var array  */
+    /** @var array */
     protected $container = [];
 
     /** @var Client */
@@ -24,7 +22,7 @@ abstract class RequestTest extends TestCase
 
     /**
      * Get client with mocked response
-     * Reference: http://docs.guzzlephp.org/en/stable/testing.html
+     * Reference: http://docs.guzzlephp.org/en/stable/testing.html.
      */
     protected function createMockClient()
     {
@@ -38,7 +36,7 @@ abstract class RequestTest extends TestCase
         $stack = HandlerStack::create($mock);
         $stack->push($history);
 
-        $this->mockedClient = new Client([ 'handler' => $stack ]);
+        $this->mockedClient = new Client(['handler' => $stack]);
         $this->container = $container;
     }
 
@@ -72,20 +70,20 @@ abstract class RequestTest extends TestCase
 
     /**
      * @param Request $guzzleRequest
-     * @param string $token
+     * @param string  $token
      */
     protected function assertAuthorizationHeader(Request $guzzleRequest, string $token)
     {
         $authorizationHeader = $guzzleRequest->getHeader(RequestHeader::AUTHORIZATION);
         $this->assertCount(1, $authorizationHeader);
-        $this->assertEquals("Bearer $token", $authorizationHeader[ 0 ]);
+        $this->assertEquals("Bearer $token", $authorizationHeader[0]);
     }
 
     protected function assertAcceptHeader(Request $guzzleRequest)
     {
         $acceptHeader = $guzzleRequest->getHeader(RequestHeader::ACCEPT);
         $this->assertCount(1, $acceptHeader);
-        $this->assertEquals('application/vnd.hmrc.1.0+json', $acceptHeader[ 0 ]);
+        $this->assertEquals('application/vnd.hmrc.1.0+json', $acceptHeader[0]);
     }
 
     protected function assertMethod(Request $guzzleRequest)
@@ -102,5 +100,6 @@ abstract class RequestTest extends TestCase
     }
 
     abstract protected function getCorrectPath();
+
     abstract protected function getCorrectMethod();
 }

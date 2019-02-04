@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Hello;
-
 
 use HMRC\Request\Request;
 use HMRC\Request\RequestMethod;

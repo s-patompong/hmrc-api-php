@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\GovernmentTestScenario\GovernmentTestScenario;
 
@@ -21,7 +19,7 @@ class SubmitVATReturnGovTestScenario extends GovernmentTestScenario
     const INVALID_PERIODKEY = 'INVALID_PERIODKEY';
 
     /**
-     * Submission has not passed validation. Invalid parameter Payload
+     * Submission has not passed validation. Invalid parameter Payload.
      */
     const INVALID_PAYLOAD = 'INVALID_PAYLOAD';
 

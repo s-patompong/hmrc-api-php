@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\VAT;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -28,7 +26,7 @@ class ViewVATReturnRequestTest extends RequestTest
         parent::__construct();
 
         $this->vrn = uniqid();
-        $this->periodKey = "A001";
+        $this->periodKey = 'A001';
     }
 
     /**
@@ -79,7 +77,7 @@ class ViewVATReturnRequestTest extends RequestTest
             new Response(200),
         ]));
         $stack->push(Middleware::history($container));
-        $mockedClient = new Client([ 'handler' => $stack ]);
+        $mockedClient = new Client(['handler' => $stack]);
 
         // Call the API
         (new ViewVATReturnRequest($this->vrn, $this->periodKey))
@@ -90,7 +88,7 @@ class ViewVATReturnRequestTest extends RequestTest
         $this->assertCount(1, $container);
 
         /** @var Request $guzzleRequest */
-        $guzzleRequest = $container[ 0 ][ 'request' ];
+        $guzzleRequest = $container[0]['request'];
         $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $accessToken);
         $this->assertAcceptHeader($guzzleRequest);

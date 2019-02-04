@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Request;
-
 
 use HMRC\Exceptions\MissingAccessTokenException;
 use HMRC\Oauth2\AccessToken;
@@ -24,14 +22,15 @@ abstract class RequestWithAccessToken extends Request
     }
 
     /**
-     * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws MissingAccessTokenException
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function fire()
     {
-        if(is_null($this->accessToken)) {
-            throw new MissingAccessTokenException;
+        if (is_null($this->accessToken)) {
+            throw new MissingAccessTokenException();
         }
 
         return parent::fire();

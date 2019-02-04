@@ -21,4 +21,4 @@ $submitVatReturnTotalValueGoodsSuppliedExVAT = 3000;
 $submitVatReturnTotalAcquisitionsExVAT = 3000;
 $submitVatGovTestScenario = '';
 
-$viewVatReturnPeriodKey = "18A2";
+$viewVatReturnPeriodKey = '18A2';

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\VAT;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -39,7 +37,7 @@ class SubmitVATReturnRequestTest extends RequestTest
      */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
-        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
+        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody());
         $request->setGovTestScenario('WRONG');
     }
 
@@ -51,7 +49,7 @@ class SubmitVATReturnRequestTest extends RequestTest
      */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
-        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
+        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody());
         $request->setGovTestScenario(SubmitVATReturnGovTestScenario::INVALID_PERIODKEY);
 
         $this->addToAssertionCount(1);
@@ -68,7 +66,7 @@ class SubmitVATReturnRequestTest extends RequestTest
      */
     public function it_throws_exception_when_has_no_post_body()
     {
-        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody);
+        $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody());
         $request->fire();
     }
 
@@ -95,7 +93,7 @@ class SubmitVATReturnRequestTest extends RequestTest
         $mockedClient = new Client(['handler' => $stack]);
 
         // Setup variable
-        $periodKey = "A001";
+        $periodKey = 'A001';
         $vatDueSales = 100;
         $vatDueAcquisitions = 101;
         $totalVatDue = 102;
@@ -107,7 +105,7 @@ class SubmitVATReturnRequestTest extends RequestTest
         $totalAcquisitionsExVAT = 108;
         $finalised = true;
 
-        $postBody = new SubmitVATReturnPostBody;
+        $postBody = new SubmitVATReturnPostBody();
         $postBody->setPeriodKey($periodKey)
             ->setVatDueSales($vatDueSales)
             ->setVatDueAcquisitions($vatDueAcquisitions)

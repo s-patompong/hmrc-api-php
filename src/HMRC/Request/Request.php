@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Request;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
@@ -22,12 +20,13 @@ abstract class Request
 
     public function __construct()
     {
-        $this->client = new Client;
+        $this->client = new Client();
     }
 
     /**
-     * @return HMRCResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return HMRCResponse
      */
     public function fire()
     {
@@ -38,7 +37,7 @@ abstract class Request
     }
 
     /**
-     * Get options to call via HTTP client
+     * Get options to call via HTTP client.
      *
      * @return array
      */
@@ -73,7 +72,7 @@ abstract class Request
 
     protected function getApiBaseUrl(): string
     {
-        if(Environment::getInstance()->isSandbox()) {
+        if (Environment::getInstance()->isSandbox()) {
             return RequestURL::SANDBOX;
         }
 
@@ -93,7 +92,7 @@ abstract class Request
      *
      * @return Request
      */
-    public function setServiceVersion(string $serviceVersion): Request
+    public function setServiceVersion(string $serviceVersion): self
     {
         $this->serviceVersion = $serviceVersion;
 
@@ -113,7 +112,7 @@ abstract class Request
      *
      * @return Request
      */
-    public function setContentType(string $contentType): Request
+    public function setContentType(string $contentType): self
     {
         $this->contentType = $contentType;
 
@@ -125,7 +124,7 @@ abstract class Request
      *
      * @return Request
      */
-    public function setClient(Client $client): Request
+    public function setClient(Client $client): self
     {
         $this->client = $client;
 
@@ -133,5 +132,6 @@ abstract class Request
     }
 
     abstract protected function getMethod(): string;
+
     abstract protected function getApiPath(): string;
 }

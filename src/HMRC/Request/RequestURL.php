@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Request;
-
 
 abstract class RequestURL
 {

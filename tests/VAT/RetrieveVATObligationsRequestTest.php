@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\Test\VAT;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -114,7 +112,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
             new Response(200),
         ]));
         $stack->push(Middleware::history($container));
-        $mockedClient = new Client([ 'handler' => $stack ]);
+        $mockedClient = new Client(['handler' => $stack]);
 
         // Call the API
         $status = RetrieveVATObligationStatus::OPEN;
@@ -126,14 +124,14 @@ class RetrieveVATObligationsRequestTest extends RequestTest
         $this->assertCount(1, $container);
 
         /** @var Request $guzzleRequest */
-        $guzzleRequest = $container[ 0 ][ 'request' ];
+        $guzzleRequest = $container[0]['request'];
         $this->assertUri($guzzleRequest);
         $this->assertAuthorizationHeader($guzzleRequest, $accessToken);
         $this->assertAcceptHeader($guzzleRequest);
         $this->assertMethod($guzzleRequest);
         $this->assertQuery($guzzleRequest, [
-            'from' => $this->from,
-            'to' => $this->to,
+            'from'   => $this->from,
+            'to'     => $this->to,
             'status' => $status,
         ]);
     }

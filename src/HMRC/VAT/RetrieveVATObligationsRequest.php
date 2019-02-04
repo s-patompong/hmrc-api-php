@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\GovernmentTestScenario\GovernmentTestScenario;
 use HMRC\Helpers\DateChecker;
@@ -11,7 +9,7 @@ use HMRC\Helpers\VariableChecker;
 class RetrieveVATObligationsRequest extends VATGetRequest
 {
     /** @var array possible statuses, O is open and F is fulfilled */
-    const POSSIBLE_STATUSES = [ RetrieveVATObligationStatus::OPEN, RetrieveVATObligationStatus::FULFILLED ];
+    const POSSIBLE_STATUSES = [RetrieveVATObligationStatus::OPEN, RetrieveVATObligationStatus::FULFILLED];
 
     /** @var string from */
     protected $from;
@@ -25,9 +23,9 @@ class RetrieveVATObligationsRequest extends VATGetRequest
     /**
      * VATObligationsRequest constructor.
      *
-     * @param string $vrn VAT registration number
-     * @param string $from correct format is YYYY-MM-DD, example 2019-01-25
-     * @param string $to correct format is YYYY-MM-DD, example 2019-01-25
+     * @param string      $vrn    VAT registration number
+     * @param string      $from   correct format is YYYY-MM-DD, example 2019-01-25
+     * @param string      $to     correct format is YYYY-MM-DD, example 2019-01-25
      * @param string|null $status correct status is O or F
      *
      * @throws \HMRC\Exceptions\InvalidDateFormatException
@@ -44,24 +42,24 @@ class RetrieveVATObligationsRequest extends VATGetRequest
         $this->to = $to;
         $this->status = $status;
 
-        if(!is_null($this->status)) {
+        if (!is_null($this->status)) {
             VariableChecker::checkPossibleValue($status, self::POSSIBLE_STATUSES);
         }
     }
 
     protected function getVatApiPath(): string
     {
-        return "/obligations";
+        return '/obligations';
     }
 
     protected function getQueryString(): array
     {
         $queryArray = [
             'from' => $this->from,
-            'to' => $this->to,
+            'to'   => $this->to,
         ];
 
-        if(!is_null($this->status)) {
+        if (!is_null($this->status)) {
             $queryArray['status'] = $this->status;
         }
 
@@ -69,12 +67,12 @@ class RetrieveVATObligationsRequest extends VATGetRequest
     }
 
     /**
-     * Get class that deal with government test scenario
+     * Get class that deal with government test scenario.
      *
      * @return GovernmentTestScenario
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new RetrieveVATObligationsGovTestScenario;
+        return new RetrieveVATObligationsGovTestScenario();
     }
 }

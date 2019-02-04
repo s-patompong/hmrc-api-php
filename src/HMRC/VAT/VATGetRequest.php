@@ -1,8 +1,6 @@
 <?php
 
-
 namespace HMRC\VAT;
-
 
 use HMRC\Request\RequestMethod;
 
@@ -14,7 +12,7 @@ abstract class VATGetRequest extends VATRequest
 
         $queryStringArray = $this->getQueryString();
 
-        if(count($queryStringArray) == 0) {
+        if (count($queryStringArray) == 0) {
             return $uri;
         }
 
