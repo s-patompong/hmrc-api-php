@@ -16,10 +16,6 @@ class Provider extends GenericProvider
      */
     public function __construct(string $clientID, string $clientSecret, string $callbackURI)
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $options = array_merge([
             'clientId'     => $clientID,
             'clientSecret' => $clientSecret,
