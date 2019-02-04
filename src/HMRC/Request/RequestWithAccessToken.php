@@ -4,6 +4,7 @@ namespace HMRC\Request;
 
 use HMRC\Exceptions\MissingAccessTokenException;
 use HMRC\Oauth2\AccessToken;
+use HMRC\Response\Response;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
 abstract class RequestWithAccessToken extends Request
@@ -25,7 +26,7 @@ abstract class RequestWithAccessToken extends Request
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws MissingAccessTokenException
      *
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return mixed|Response
      */
     public function fire()
     {
