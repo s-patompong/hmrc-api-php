@@ -44,7 +44,7 @@ class Response
      */
     public function getJson(bool $assoc = false)
     {
-        return json_decode($this->response->getBody()->getContents(), $assoc);
+        return json_decode((string)$this->response->getBody(), $assoc);
     }
 
     /**
@@ -64,7 +64,7 @@ class Response
     {
         header('Content-Type: application/json');
 
-        echo $this->getBody();
+        echo (string)$this->getBody();
     }
 
     /**

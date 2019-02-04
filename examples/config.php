@@ -1,8 +1,8 @@
 <?php
 
-$clientId = 'clientid';
-$clientSecret = 'clientsecret';
-$serverToken = 'servertoken';
+$clientId = '58Dvv2CAtfe8ZXq0nfCR5qPe7bUa';
+$clientSecret = '0833135d-b932-4557-bbdd-7dd8732ea009';
+$serverToken = 'df3bd5adc443307a24d7e496f579d420';
 
 $vrn = '666383495';
 $vatObligationFrom = '2018-01-01';
