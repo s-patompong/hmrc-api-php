@@ -1,5 +1,6 @@
 # HMRC API PHP
 [![Build Status](https://travis-ci.org/s-patompong/hmrc-api-php.svg?branch=master)](https://travis-ci.org/s-patompong/hmrc-api-php)
+[![StyleCI](https://github.styleci.io/repos/167135773/shield?branch=master)](https://github.styleci.io/repos/167135773)
 
 This library can be used to connect and does operations on HMRC API https://developer.service.hmrc.gov.uk/api-documentation.
 
