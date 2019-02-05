@@ -73,6 +73,6 @@ class RetrieveVATObligationsRequest extends VATGetRequest
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new RetrieveVATObligationsGovTestScenario;
+        return new RetrieveVATObligationsGovTestScenario();
     }
 }

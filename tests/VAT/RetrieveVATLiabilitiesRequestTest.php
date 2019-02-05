@@ -101,7 +101,7 @@ class RetrieveVATLiabilitiesRequestTest extends RequestTest
         $this->assertMethod($guzzleRequest);
         $this->assertQuery($guzzleRequest, [
             'from' => $this->from,
-            'to' => $this->to,
+            'to'   => $this->to,
         ]);
     }
 

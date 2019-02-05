@@ -38,7 +38,7 @@ class RetrieveVATPaymentRequest extends VATGetRequest
     {
         return [
             'from' => $this->from,
-            'to' => $this->to,
+            'to'   => $this->to,
         ];
     }
 
@@ -49,7 +49,7 @@ class RetrieveVATPaymentRequest extends VATGetRequest
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new RetrieveVATPaymentGovTestScenario;
+        return new RetrieveVATPaymentGovTestScenario();
     }
 
     /**
@@ -59,6 +59,6 @@ class RetrieveVATPaymentRequest extends VATGetRequest
      */
     protected function getVatApiPath(): string
     {
-        return "/payments";
+        return '/payments';
     }
 }
