@@ -36,6 +36,6 @@ class ViewVATReturnRequest extends VATGetRequest
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new ViewVATReturnGovTestScenario();
+        return new ViewVATReturnGovTestScenario;
     }
 }
