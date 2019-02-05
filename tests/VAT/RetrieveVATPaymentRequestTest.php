@@ -11,11 +11,11 @@ use GuzzleHttp\Psr7\Response;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
-use HMRC\VAT\RetrieveVATLiabilitiesGovTestScenario;
-use HMRC\VAT\RetrieveVATLiabilitiesRequest;
+use HMRC\VAT\RetrieveVATPaymentGovTestScenario;
+use HMRC\VAT\RetrieveVATPaymentRequest;
 use League\OAuth2\Client\Token\AccessToken;
 
-class RetrieveVATLiabilitiesRequestTest extends RequestTest
+class RetrieveVATPaymentRequestTest extends RequestTest
 {
     private $vrn;
 
@@ -43,7 +43,7 @@ class RetrieveVATLiabilitiesRequestTest extends RequestTest
      */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
-        $request = new RetrieveVATLiabilitiesRequest($this->vrn, $this->from, $this->to);
+        $request = new RetrieveVATPaymentRequest($this->vrn, $this->from, $this->to);
         $request->setGovTestScenario('WRONG');
     }
 
@@ -56,8 +56,8 @@ class RetrieveVATLiabilitiesRequestTest extends RequestTest
      */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
-        $request = new RetrieveVATLiabilitiesRequest($this->vrn, $this->from, $this->to);
-        $request->setGovTestScenario(RetrieveVATLiabilitiesGovTestScenario::SINGLE_LIABILITY);
+        $request = new RetrieveVATPaymentRequest($this->vrn, $this->from, $this->to);
+        $request->setGovTestScenario(RetrieveVATPaymentGovTestScenario::SINGLE_PAYMENT);
 
         $this->addToAssertionCount(1);
     }
@@ -86,7 +86,7 @@ class RetrieveVATLiabilitiesRequestTest extends RequestTest
         $mockedClient = new Client(['handler' => $stack]);
 
         // Call the API
-        (new RetrieveVATLiabilitiesRequest($this->vrn, $this->from, $this->to))
+        (new RetrieveVATPaymentRequest($this->vrn, $this->from, $this->to))
             ->setClient($mockedClient)
             ->fire();
 
@@ -107,7 +107,7 @@ class RetrieveVATLiabilitiesRequestTest extends RequestTest
 
     protected function getCorrectPath()
     {
-        return "/organisations/vat/{$this->vrn}/liabilities";
+        return "/organisations/vat/{$this->vrn}/payments";
     }
 
     protected function getCorrectMethod()
