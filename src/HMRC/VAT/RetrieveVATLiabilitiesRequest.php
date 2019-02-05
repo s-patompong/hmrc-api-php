@@ -38,7 +38,7 @@ class RetrieveVATLiabilitiesRequest extends VATGetRequest
     {
         return [
             'from' => $this->from,
-            'to' => $this->to,
+            'to'   => $this->to,
         ];
     }
 
@@ -49,7 +49,7 @@ class RetrieveVATLiabilitiesRequest extends VATGetRequest
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new RetrieveVATLiabilitiesGovTestScenario;
+        return new RetrieveVATLiabilitiesGovTestScenario();
     }
 
     /**
@@ -59,6 +59,6 @@ class RetrieveVATLiabilitiesRequest extends VATGetRequest
      */
     protected function getVatApiPath(): string
     {
-        return "/liabilities";
+        return '/liabilities';
     }
 }

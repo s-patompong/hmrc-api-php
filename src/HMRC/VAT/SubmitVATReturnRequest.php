@@ -23,6 +23,6 @@ class SubmitVATReturnRequest extends VATPostRequest
      */
     protected function getGovTestScenarioClass(): GovernmentTestScenario
     {
-        return new SubmitVATReturnGovTestScenario;
+        return new SubmitVATReturnGovTestScenario();
     }
 }
