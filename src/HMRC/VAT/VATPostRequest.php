@@ -4,6 +4,7 @@ namespace HMRC\VAT;
 
 use HMRC\Request\PostBody;
 use HMRC\Request\RequestMethod;
+use HMRC\Response\Response;
 
 abstract class VATPostRequest extends VATRequest
 {
@@ -27,7 +28,7 @@ abstract class VATPostRequest extends VATRequest
      * @throws \HMRC\Exceptions\InvalidPostBodyException
      * @throws \HMRC\Exceptions\MissingAccessTokenException
      *
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return mixed|Response
      */
     public function fire()
     {
