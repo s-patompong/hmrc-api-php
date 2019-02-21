@@ -59,7 +59,7 @@ class EnvironmentTest extends TestCase
         $this->assertEquals(true, Environment::getInstance()->isSandbox());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Environment::reset();
     }
