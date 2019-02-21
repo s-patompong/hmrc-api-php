@@ -10,7 +10,7 @@ class EnvironmentTest extends TestCase
     /** @var Environment */
     private $environment;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->environment = Environment::getInstance();
     }

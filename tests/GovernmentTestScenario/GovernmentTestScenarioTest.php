@@ -9,7 +9,7 @@ class GovernmentTestScenarioTest extends TestCase
     /** @var StubGovTestScenario */
     private $stub;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->stub = new StubGovTestScenario();
     }
