@@ -17,10 +17,16 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
-    <php>
-        <!--
-        <env name="REDIS_HOST" value="127.0.0.1" />
-        <env name="REDIS_PORT" value="6379" />
-        -->
-    </php>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="tap" target="build/report.tap"/>
+        <log type="junit" target="build/report.junit.xml"/>
+        <log type="coverage-text" target="build/coverage.txt"/>
+        <log type="coverage-html" target="build/html/"/>
+        <log type="coverage-clover" target="build/logs/cover.xml"/>
+    </logging>
 </phpunit>
