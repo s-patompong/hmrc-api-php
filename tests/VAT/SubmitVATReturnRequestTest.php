@@ -8,6 +8,8 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use HMRC\Exceptions\InvalidPostBodyException;
+use HMRC\Exceptions\InvalidVariableValueException;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
@@ -29,23 +31,17 @@ class SubmitVATReturnRequestTest extends RequestTest
 
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\InvalidVariableValueException
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \ReflectionException
      */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
+        $this->expectException(InvalidVariableValueException::class);
+
         $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody());
         $request->setGovTestScenario('WRONG');
     }
 
     /**
      * @test
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \ReflectionException
      */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
@@ -57,24 +53,17 @@ class SubmitVATReturnRequestTest extends RequestTest
 
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\InvalidPostBodyException
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \HMRC\Exceptions\InvalidPostBodyException
-     * @throws \HMRC\Exceptions\MissingAccessTokenException
      */
     public function it_throws_exception_when_has_no_post_body()
     {
+        $this->expectException(InvalidPostBodyException::class);
+
         $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody());
         $request->fire();
     }
 
     /**
      * @test
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableTypeException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function it_calls_correct_endpoint()
     {

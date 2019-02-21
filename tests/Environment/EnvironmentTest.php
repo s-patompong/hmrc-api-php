@@ -3,6 +3,7 @@
 namespace HMRC\Test\Environment;
 
 use HMRC\Environment\Environment;
+use HMRC\Exceptions\InvalidVariableValueException;
 use PHPUnit\Framework\TestCase;
 
 class EnvironmentTest extends TestCase
@@ -25,18 +26,16 @@ class EnvironmentTest extends TestCase
 
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\InvalidVariableValueException
      */
     public function it_throws_exception_when_given_wrong_environment()
     {
+        $this->expectException(InvalidVariableValueException::class);
+
         $this->environment->setEnv('wrong');
     }
 
     /**
      * @test
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
      */
     public function it_accepts_correct_environment()
     {

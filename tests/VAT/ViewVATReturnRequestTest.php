@@ -8,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use HMRC\Exceptions\InvalidVariableValueException;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
@@ -31,23 +32,17 @@ class ViewVATReturnRequestTest extends RequestTest
 
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\InvalidVariableValueException
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \ReflectionException
      */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
+        $this->expectException(InvalidVariableValueException::class);
+
         $request = new ViewVATReturnRequest($this->vrn, $this->periodKey);
         $request->setGovTestScenario('WRONG');
     }
 
     /**
      * @test
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \ReflectionException
      */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
@@ -59,9 +54,6 @@ class ViewVATReturnRequestTest extends RequestTest
 
     /**
      * @test
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \HMRC\Exceptions\InvalidVariableTypeException
      */
     public function it_calls_correct_endpoint()
     {

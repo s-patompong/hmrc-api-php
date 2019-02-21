@@ -8,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use HMRC\Exceptions\MissingAccessTokenException;
 use HMRC\Hello\HelloUserRequest;
 use HMRC\Oauth2\AccessToken as HMRCAccessToken;
 use HMRC\Request\RequestMethod;
@@ -18,23 +19,17 @@ class HelloUserRequestTest extends RequestTest
 {
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\MissingAccessTokenException
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \HMRC\Exceptions\MissingAccessTokenException
      */
     public function it_throws_exception_when_has_no_access_token()
     {
+        $this->expectException(MissingAccessTokenException::class);
+
         $request = new HelloUserRequest();
         $request->fire();
     }
 
     /**
      * @test
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableTypeException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function it_calls_correct_endpoint()
     {

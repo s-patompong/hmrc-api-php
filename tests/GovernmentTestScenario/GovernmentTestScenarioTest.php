@@ -2,6 +2,7 @@
 
 namespace HMRC\Test\GovernmentTestScenario;
 
+use HMRC\Exceptions\InvalidVariableValueException;
 use PHPUnit\Framework\TestCase;
 
 class GovernmentTestScenarioTest extends TestCase
@@ -16,8 +17,6 @@ class GovernmentTestScenarioTest extends TestCase
 
     /**
      * @test
-     *
-     * @throws \ReflectionException
      */
     public function it_gets_correct_valid_government_test_scenarios()
     {
@@ -30,22 +29,16 @@ class GovernmentTestScenarioTest extends TestCase
 
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\InvalidVariableValueException
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \ReflectionException
      */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
+        $this->expectException(InvalidVariableValueException::class);
+
         $this->stub->checkValid('wrong');
     }
 
     /**
      * @test
-     *
-     * @throws \HMRC\Exceptions\InvalidVariableValueException
-     * @throws \ReflectionException
      */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {

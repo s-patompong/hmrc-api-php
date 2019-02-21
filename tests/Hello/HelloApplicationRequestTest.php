@@ -8,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use HMRC\Exceptions\EmptyServerTokenException;
 use HMRC\Hello\HelloApplicationRequest;
 use HMRC\Request\RequestMethod;
 use HMRC\Test\Request\RequestTest;
@@ -16,22 +17,17 @@ class HelloApplicationRequestTest extends RequestTest
 {
     /**
      * @test
-     *
-     * @expectedException \HMRC\Exceptions\EmptyServerTokenException
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \HMRC\Exceptions\EmptyServerTokenException
      */
     public function it_throws_exception_when_server_token_is_empty()
     {
+        $this->expectException(EmptyServerTokenException::class);
+
         $request = new HelloApplicationRequest();
         $request->fire();
     }
 
     /**
      * @test
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function it_calls_correct_endpoint()
     {

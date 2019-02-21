@@ -16,10 +16,6 @@ class HelloWorldRequestTest extends RequestTest
 {
     /**
      * @test
-     *
-     * Test that it can call correct endpoint with correct options
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function it_calls_correct_endpoint()
     {
