@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Soon to be implemented.
 
+## [v1.1.5] - 2019-02-22
+### Changed
+- Update test script in travis.yml file.
 
 ## [v1.1.4] - 2019-02-22
 ### Changed
