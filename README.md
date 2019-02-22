@@ -106,4 +106,4 @@ In default mode, this library will talk with `sandbox` environment of HMRC. If y
 ## Development & Contribution
 Contributor is more than welcome to help develop this library, all the important methods should have unit test.
 
-To run test, simply call `composer run-script test` command on terminal.
+To run test, simply call `composer run test` command on terminal.
