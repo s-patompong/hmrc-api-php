@@ -17,9 +17,7 @@ use League\OAuth2\Client\Token\AccessToken;
 
 class HelloUserRequestTest extends RequestTest
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_has_no_access_token()
     {
         $this->expectException(MissingAccessTokenException::class);
@@ -28,9 +26,7 @@ class HelloUserRequestTest extends RequestTest
         $request->fire();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup access token

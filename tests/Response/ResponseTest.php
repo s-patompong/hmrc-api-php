@@ -8,9 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_success_when_response_is_success()
     {
         $body = [
@@ -26,9 +24,7 @@ class ResponseTest extends TestCase
         $this->assertEquals($body, $response->getArray());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_false_when_response_is_failure()
     {
         $guzzleResponse = new Response(500, [], '');

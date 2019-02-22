@@ -29,9 +29,7 @@ class SubmitVATReturnRequestTest extends RequestTest
         $this->vrn = uniqid();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -40,9 +38,7 @@ class SubmitVATReturnRequestTest extends RequestTest
         $request->setGovTestScenario('WRONG');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new SubmitVATReturnRequest($this->vrn, new SubmitVATReturnPostBody());
@@ -51,9 +47,7 @@ class SubmitVATReturnRequestTest extends RequestTest
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_has_no_post_body()
     {
         $this->expectException(InvalidPostBodyException::class);
@@ -62,9 +56,7 @@ class SubmitVATReturnRequestTest extends RequestTest
         $request->fire();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup access token

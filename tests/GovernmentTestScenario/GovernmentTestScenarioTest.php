@@ -15,9 +15,7 @@ class GovernmentTestScenarioTest extends TestCase
         $this->stub = new StubGovTestScenario();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_correct_valid_government_test_scenarios()
     {
         $this->assertEquals([
@@ -27,9 +25,7 @@ class GovernmentTestScenarioTest extends TestCase
         ], $this->stub->getValidGovTestScenarios());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -37,9 +33,7 @@ class GovernmentTestScenarioTest extends TestCase
         $this->stub->checkValid('wrong');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $this->stub->checkValid(StubGovTestScenario::SIMPLE_CASE);

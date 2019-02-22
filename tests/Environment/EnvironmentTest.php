@@ -16,17 +16,13 @@ class EnvironmentTest extends TestCase
         $this->environment = Environment::getInstance();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_uses_sandbox_mode_by_default()
     {
         $this->assertEquals(true, $this->environment->isSandbox());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_environment()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -34,9 +30,7 @@ class EnvironmentTest extends TestCase
         $this->environment->setEnv('wrong');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_accepts_correct_environment()
     {
         $this->environment->setEnv(Environment::LIVE);
@@ -44,9 +38,7 @@ class EnvironmentTest extends TestCase
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_be_reset()
     {
         $this->assertEquals(true, Environment::getInstance()->isSandbox());

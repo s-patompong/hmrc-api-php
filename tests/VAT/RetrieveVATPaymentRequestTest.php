@@ -33,9 +33,7 @@ class RetrieveVATPaymentRequestTest extends RequestTest
         $this->to = '2019-01-01';
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -44,9 +42,7 @@ class RetrieveVATPaymentRequestTest extends RequestTest
         $request->setGovTestScenario('WRONG');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new RetrieveVATPaymentRequest($this->vrn, $this->from, $this->to);
@@ -55,9 +51,7 @@ class RetrieveVATPaymentRequestTest extends RequestTest
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup access token

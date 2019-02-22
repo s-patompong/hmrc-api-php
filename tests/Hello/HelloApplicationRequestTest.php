@@ -15,9 +15,7 @@ use HMRC\Test\Request\RequestTest;
 
 class HelloApplicationRequestTest extends RequestTest
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_server_token_is_empty()
     {
         $this->expectException(EmptyServerTokenException::class);
@@ -26,9 +24,7 @@ class HelloApplicationRequestTest extends RequestTest
         $request->fire();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup server token

@@ -34,9 +34,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
         $this->to = '2019-01-01';
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -45,9 +43,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
         $request->setGovTestScenario('WRONG');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to);
@@ -56,9 +52,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_status()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -66,9 +60,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
         new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, 'A');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_doesnt_throws_exception_when_given_correct_status()
     {
         new RetrieveVATObligationsRequest($this->vrn, $this->from, $this->to, RetrieveVATObligationStatus::OPEN);
@@ -77,9 +69,7 @@ class RetrieveVATObligationsRequestTest extends RequestTest
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup access token

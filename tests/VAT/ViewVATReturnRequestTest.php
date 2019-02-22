@@ -30,9 +30,7 @@ class ViewVATReturnRequestTest extends RequestTest
         $this->periodKey = 'A001';
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_throws_exception_when_given_wrong_government_test_scenario()
     {
         $this->expectException(InvalidVariableValueException::class);
@@ -41,9 +39,7 @@ class ViewVATReturnRequestTest extends RequestTest
         $request->setGovTestScenario('WRONG');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_doesnt_throws_exception_when_given_correct_government_test_scenario()
     {
         $request = new ViewVATReturnRequest($this->vrn, $this->periodKey);
@@ -52,9 +48,7 @@ class ViewVATReturnRequestTest extends RequestTest
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup access token

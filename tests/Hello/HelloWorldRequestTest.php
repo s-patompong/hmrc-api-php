@@ -14,9 +14,7 @@ use HMRC\Test\Request\RequestTest;
 
 class HelloWorldRequestTest extends RequestTest
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_calls_correct_endpoint()
     {
         // Setup mocked client
