@@ -5,6 +5,13 @@ php:
   - '7.2'
   - '7.3'
 
-before_script: composer install
+env:
+  matrix:
+    - COMPOSER_FLAGS="--prefer-lowest"
+    - COMPOSER_FLAGS=""
 
-script: phpunit
+before_script:
+  - travis_retry composer update ${COMPOSER_FLAGS}
+
+script:
+  - vendor/bin/phpunit
