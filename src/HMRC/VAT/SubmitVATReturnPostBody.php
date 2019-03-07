@@ -84,15 +84,15 @@ class SubmitVATReturnPostBody implements PostBody
     {
         return [
             'periodKey'                    => $this->periodKey,
-            'vatDueSales'                  => $this->vatDueSales,
-            'vatDueAcquisitions'           => $this->vatDueAcquisitions,
-            'totalVatDue'                  => $this->totalVatDue,
-            'vatReclaimedCurrPeriod'       => $this->vatReclaimedCurrPeriod,
-            'netVatDue'                    => $this->netVatDue,
-            'totalValueSalesExVAT'         => $this->totalValueSalesExVAT,
-            'totalValuePurchasesExVAT'     => $this->totalValuePurchasesExVAT,
-            'totalValueGoodsSuppliedExVAT' => $this->totalValueGoodsSuppliedExVAT,
-            'totalAcquisitionsExVAT'       => $this->totalAcquisitionsExVAT,
+            'vatDueSales'                  => (string) $this->vatDueSales,
+            'vatDueAcquisitions'           => (string) $this->vatDueAcquisitions,
+            'totalVatDue'                  => (string) $this->totalVatDue,
+            'vatReclaimedCurrPeriod'       => (string) $this->vatReclaimedCurrPeriod,
+            'netVatDue'                    => (string) $this->netVatDue,
+            'totalValueSalesExVAT'         => (string) $this->totalValueSalesExVAT,
+            'totalValuePurchasesExVAT'     => (string) $this->totalValuePurchasesExVAT,
+            'totalValueGoodsSuppliedExVAT' => (string) $this->totalValueGoodsSuppliedExVAT,
+            'totalAcquisitionsExVAT'       => (string) $this->totalAcquisitionsExVAT,
             'finalised'                    => $this->finalised,
         ];
     }
