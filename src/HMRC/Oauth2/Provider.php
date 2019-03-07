@@ -25,6 +25,17 @@ class Provider extends GenericProvider
         parent::__construct($options);
     }
 
+    /**
+     * Returns the string that should be used to separate scopes when building
+     * the URL for requesting an access token.
+     *
+     * @return string Scope separator, defaults to ','
+     */
+    protected function getScopeSeparator()
+    {
+        return ' ';
+    }
+
     private function optionFromEnvironments(): array
     {
         $subDomain = Environment::getInstance()->isLive() ? 'api' : 'test-api';
@@ -39,7 +50,7 @@ class Provider extends GenericProvider
     public function redirectToAuthorizationURL(array $scopes)
     {
         $authorizationUrl = $this->getAuthorizationUrl([
-            'scope' => implode(' ', $scopes),
+            'scope' => $scopes,
         ]);
 
         header('Location: '.$authorizationUrl);
