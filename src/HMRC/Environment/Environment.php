@@ -18,7 +18,7 @@ class Environment
     private $env;
 
     /** @var array of request headers which will be added in all requests in this environment */
-    private $request_headers;
+    private $request_headers = [];
 
     private function __construct()
     {
