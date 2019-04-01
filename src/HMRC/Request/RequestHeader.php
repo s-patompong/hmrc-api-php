@@ -29,13 +29,13 @@ abstract class RequestHeader
     public const GOV_CLIENT_DEVICE_ID = 'Gov-Client-Device-ID';
 
     /** @var string A key-value data structure containing the user identifiers. The keys should indicate accounts the user holds. */
-    public const GOV_CLIENT_USER_ID = 'Gov-Client-User-IDs';
+    public const GOV_CLIENT_USER_IDS = 'Gov-Client-User-IDs';
 
     /** @var string The local timezone of the originating device, expressed as UTC±<hh>:<mm>. */
     public const GOV_CLIENT_TIMEZONE = 'Gov-Client-Timezone';
 
     /** @var string A list of all local IP addresses (IPv4 and IPv6) available to the originating device. */
-    public const GOV_CLIENT_LOCAL_IP = 'Gov-Client-Local-IPs';
+    public const GOV_CLIENT_LOCAL_IPS = 'Gov-Client-Local-IPs';
 
     /** @var string Information related to the originating device’s screens */
     public const GOV_CLIENT_SCREENS = 'Gov-Client-Screens';
@@ -65,7 +65,7 @@ abstract class RequestHeader
     public const GOV_VENDOR_LICENSE_IDS = 'Gov-Vendor-License-IDs';
 
     /** @var string The public IP address of the servers to which the originating device sent their requests. */
-    public const GOV_VENDOR_PUBLIC_ID = 'Gov-Vendor-Public-IP';
+    public const GOV_VENDOR_PUBLIC_IP = 'Gov-Vendor-Public-IP';
 
     /** @var string The list of MAC addresses available on the originating device. */
     public const GOV_CLIENT_MAC_ADDRESSES = 'Gov-Client-MAC-Addresses';
