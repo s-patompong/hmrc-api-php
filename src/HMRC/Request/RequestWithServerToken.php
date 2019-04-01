@@ -22,10 +22,9 @@ abstract class RequestWithServerToken extends Request
 
     protected function getHeaders(): array
     {
-        return [
-            RequestHeader::ACCEPT        => $this->getAcceptHeader(),
+        return array_merge(parent:getHeaders(),[
             RequestHeader::AUTHORIZATION => $this->getAuthorizationHeader(ServerToken::getInstance()->get()),
-        ];
+        ]);
     }
 
     /**
