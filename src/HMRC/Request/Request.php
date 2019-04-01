@@ -20,7 +20,6 @@ abstract class Request
 
     /**
      * Array of additional headers to add in each request.
-     * This can be used to add fraud prevention headers, for example.
      *
      * @var array
      */
@@ -68,9 +67,16 @@ abstract class Request
 
     protected function getHeaders(): array
     {
-        return array_merge($this->headers, [
-            RequestHeader::ACCEPT => $this->getAcceptHeader(),
-        ]);
+        return array_merge(
+            // headers set in environment
+            Environment::getInstance()->getDefaultRequestHeaders(),
+            // headers set for this request
+            $this->headers,
+            // and more
+            [
+                RequestHeader::ACCEPT => $this->getAcceptHeader(),
+            ]
+        );
     }
 
     protected function getURI(): string

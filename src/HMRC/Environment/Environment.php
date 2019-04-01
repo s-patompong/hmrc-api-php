@@ -17,6 +17,9 @@ class Environment
     /** @var string */
     private $env;
 
+    /** @var array of request headers which will be added in all requests in this environment */
+    private $request_headers;
+
     private function __construct()
     {
         $this->env = self::SANDBOX;
@@ -71,6 +74,27 @@ class Environment
     public function setToLive()
     {
         $this->env = self::LIVE;
+    }
+
+    /**
+     * Sets Request headers which will be included in all Requests.
+     * This can be nicely used to include fraud prevention headers, for example.
+     *
+     * @param array $headers
+     */
+    public function setDefaultRequestHeaders(array $headers)
+    {
+        $this->request_headers = $headers;
+    }
+
+    /**
+     * Returns default request headers.
+     *
+     * @return array
+     */
+    public function getDefaultRequestHeaders(): array
+    {
+        return $this->request_headers;
     }
 
     /**
