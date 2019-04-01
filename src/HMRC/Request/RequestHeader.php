@@ -72,5 +72,4 @@ abstract class RequestHeader
 
     /** @var string A list that details hops over the internet between services that terminate TLS. */
     public const GOV_VENDOR_FORWARDED = 'Gov-Vendor-Forwarded';
-
 }

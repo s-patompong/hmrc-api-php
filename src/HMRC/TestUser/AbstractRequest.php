@@ -2,10 +2,10 @@
 
 namespace HMRC\TestUser;
 
-use HMRC\Request\RequestWithServerToken;
-use HMRC\Request\RequestMethod;
 use HMRC\Request\RequestHeader;
 use HMRC\Request\RequestHeaderValue;
+use HMRC\Request\RequestMethod;
+use HMRC\Request\RequestWithServerToken;
 
 abstract class AbstractRequest extends RequestWithServerToken
 {
@@ -26,12 +26,11 @@ abstract class AbstractRequest extends RequestWithServerToken
 
     protected function getHeaders(): array
     {
-        $ownHeaders = [
+        return array_merge(parent::getHeaders(), [
             RequestHeader::CONTENT_TYPE => RequestHeaderValue::APPLICATION_JSON,
-        ];
-
-        return array_merge($ownHeaders, parent::getHeaders());
+        ]);
     }
+
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \HMRC\Exceptions\InvalidPostBodyException
