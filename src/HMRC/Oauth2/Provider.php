@@ -3,6 +3,7 @@
 namespace HMRC\Oauth2;
 
 use HMRC\Environment\Environment;
+use HMRC\Request\RequestURL;
 use League\OAuth2\Client\Provider\GenericProvider;
 
 class Provider extends GenericProvider
@@ -38,12 +39,12 @@ class Provider extends GenericProvider
 
     private function optionFromEnvironments(): array
     {
-        $subDomain = Environment::getInstance()->isLive() ? 'api' : 'test-api';
+        $host = Environment::getInstance()->isLive() ? RequestURL::LIVE : RequestURL::SANDBOX;
 
         return [
-            'urlAuthorize'            => "https://{$subDomain}.service.hmrc.gov.uk/oauth/authorize",
-            'urlAccessToken'          => "https://{$subDomain}.service.hmrc.gov.uk/oauth/token",
-            'urlResourceOwnerDetails' => "https://{$subDomain}.service.hmrc.gov.uk/oauth/resource",
+            'urlAuthorize'            => "{$host}/oauth/authorize",
+            'urlAccessToken'          => "{$host}/oauth/token",
+            'urlResourceOwnerDetails' => "{$host}/oauth/resource",
         ];
     }
 
