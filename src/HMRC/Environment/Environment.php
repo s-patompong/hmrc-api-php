@@ -18,7 +18,7 @@ class Environment
     private $env;
 
     /** @var array of request headers which will be added in all requests in this environment */
-    private $request_headers = [];
+    private $requestHeaders = [];
 
     private function __construct()
     {
@@ -84,7 +84,7 @@ class Environment
      */
     public function setDefaultRequestHeaders(array $headers)
     {
-        $this->request_headers = $headers;
+        $this->requestHeaders = $headers;
     }
 
     /**
@@ -94,7 +94,7 @@ class Environment
      */
     public function getDefaultRequestHeaders(): array
     {
-        return $this->request_headers;
+        return $this->requestHeaders;
     }
 
     /**
