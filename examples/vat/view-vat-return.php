@@ -9,7 +9,7 @@ if (
     !isset($_GET['vrn']) ||
     !isset($_GET['period_key'])
 ) {
-    die('ERROR: Please fill vrn, period_key and submit the form again');
+    exit('ERROR: Please fill vrn, period_key and submit the form again');
 }
 
 $request = new \HMRC\VAT\ViewVATReturnRequest($_GET['vrn'], $_GET['period_key']);

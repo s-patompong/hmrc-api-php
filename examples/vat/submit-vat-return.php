@@ -18,7 +18,7 @@ if (
     !isset($_GET['total_value_goods_supplied_ex_vat']) ||
     !isset($_GET['total_acquisitions_ex_vat'])
 ) {
-    die('ERROR: Please fill vrn, period_key, vat_due_sale, vat_due_acquisitions, total_vat_due, vat_reclaimed_curr_period, net_vat_due, total_value_sales_ex_vat, total_value_purchases_ex_vat, total_value_goods_supplied_ex_vat, total_acquisitions_ex_vat and submit the form again');
+    exit('ERROR: Please fill vrn, period_key, vat_due_sale, vat_due_acquisitions, total_vat_due, vat_reclaimed_curr_period, net_vat_due, total_value_sales_ex_vat, total_value_purchases_ex_vat, total_value_goods_supplied_ex_vat, total_acquisitions_ex_vat and submit the form again');
 }
 
 $finalised = $_GET['finalised'] == '1' ? true : false;
