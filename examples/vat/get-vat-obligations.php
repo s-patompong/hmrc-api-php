@@ -6,7 +6,7 @@ require_once __DIR__.'/../helpers.php';
 session_start();
 
 if (!isset($_GET['vrn']) || !isset($_GET['from']) || !isset($_GET['to'])) {
-    die('ERROR: Please fill VRN, From, To and submit the form again');
+    exit('ERROR: Please fill VRN, From, To and submit the form again');
 }
 
 $status = isset($_GET['status']) ? $_GET['status'] : null;

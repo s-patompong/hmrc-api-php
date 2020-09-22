@@ -7,7 +7,7 @@ use HMRC\Oauth2\Provider;
 use HMRC\Scope\Scope;
 
 if (!isset($_GET['client_id']) || !isset($_GET['client_secret'])) {
-    die('Error: Please fill both client id and client secret before test again.');
+    exit('Error: Please fill both client id and client secret before test again.');
 }
 
 session_start();
